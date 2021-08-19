@@ -107,10 +107,12 @@ public:
     
     }
 
+    // Bug for squares that go off board.
     void updateGame(char realBoard[][COLS], char gameBoard[][COLS])
     {
         if (realBoard[row][col] == '*')
             gameBoard[row][col] = '*';
+        
         else {
             if (realBoard[row-1][col] == '*')
                 mineCounter++;
@@ -160,18 +162,15 @@ int main() {
     char gameBoard[ROWS][COLS];
     char realBoard[ROWS][COLS];
     
-    /*
     game.makeBoard(gameBoard);
     game.printBoard(gameBoard);
     game.makeBoard(realBoard);
     game.placeMines(realBoard);
     game.printBoard(realBoard);
     game.move(gameBoard);
-    game.updateBoard(realBoard, gameBoard);
+    game.updateGame(realBoard, gameBoard);
     game.printBoard(gameBoard);
-    cout << endl;
-    */
-    game.playGame(realBoard, gameBoard);
+    //game.playGame(realBoard, gameBoard);
     
     
     return(0);
