@@ -136,7 +136,6 @@ public:
     
     void playGame(char realBoard[][COLS], char gameBoard[][COLS])
     {
-
         makeBoard(realBoard);
         placeMines(realBoard);
         makeBoard(gameBoard);
@@ -161,13 +160,17 @@ int main() {
     char gameBoard[ROWS][COLS];
     char realBoard[ROWS][COLS];
     
-    //game.makeBoard(gameBoard);
-    //game.printBoard(gameBoard);
-    //game.makeBoard(realBoard);
-    //game.placeMines(realBoard);
-    //game.printBoard(realBoard);
-    //cout << endl;
-    
+    /*
+    game.makeBoard(gameBoard);
+    game.printBoard(gameBoard);
+    game.makeBoard(realBoard);
+    game.placeMines(realBoard);
+    game.printBoard(realBoard);
+    game.move(gameBoard);
+    game.updateBoard(realBoard, gameBoard);
+    game.printBoard(gameBoard);
+    cout << endl;
+    */
     game.playGame(realBoard, gameBoard);
     
     
