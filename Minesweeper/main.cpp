@@ -14,13 +14,12 @@ const int COLS = 5;
 class Minesweeper
 {
 private:
-    char* position;
-
-public:
+    int row;
+    int col;
     
+public:
     void makeBoard(char array[][COLS])
     {
-    
         for (int i = 0; i < COLS; i++)
         {
             for (int j = 0; j < COLS; j++)
@@ -66,10 +65,18 @@ public:
         return(result);
     }
 
-    void move(char array[][COLS], int i, int j)
+    void move(char array[][COLS])
     {
-        if (array[i][j] == '*')
+        int i, j;
+        cout << "Pick a spot on the board (row, column):\n";
+        cin >> i; cin >> j;
+        row = i;
+        col = j;
+        
+        if (array[row][col] == '*')
             cout << "You died!" << endl;
+        else
+            cout << "You're still alive." << endl;
     }
     
 };
@@ -77,15 +84,17 @@ public:
 
 int main() {
 
+    Minesweeper game;
     
     char gameBoard[ROWS][COLS];
     char realBoard[ROWS][COLS];
     
-    makeBoard(gameBoard);
-    printBoard(gameBoard);
-    makeBoard(realBoard);
-    placeMines(realBoard);
-    move(realBoard, 2, 1);
+    game.makeBoard(gameBoard);
+    game.printBoard(gameBoard);
+    game.makeBoard(realBoard);
+    game.placeMines(realBoard);
+    cout << endl;
+    game.move(realBoard);
     
     return(0);
 }
