@@ -98,12 +98,6 @@ public:
             validMove = true;
             row = y;
             col = x;
-            /*
-            if (board[row][col] == '*')
-                cout << "You died!" << endl;
-            else
-                cout << "You're still alive." << endl;
-             */
         }
         else
         {
@@ -120,15 +114,6 @@ public:
         return(result);
     }
     
-    bool isValidMove()
-    {
-        bool result = true;
-        if (!isValidCell(row, col))
-            result = false;
-        
-        return(result);
-    }
-    // Bug for squares that go off board.
     void updateGame(char realBoard[][COLS], char gameBoard[][COLS])
     {
         if (validMove)
