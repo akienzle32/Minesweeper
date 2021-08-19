@@ -34,20 +34,22 @@ void placeMines(char array[][COLS])
 
 void printBoard(char array[][COLS])
 {
-    for (int i = 0; i < COLS; i++)
+    for (int i = 0; i <= COLS; i++)
     {
-        
+        cout << i << " ";
     }
     
+    cout << endl;
     
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < COLS; i++)
     {
-        for (int j = 0; j < 5; j++)
+        cout << i+1 << " ";
+        for (int j = 0; j < COLS; j++)
         {
             cout << array[i][j] << " ";
         }
         cout << endl;
-    }
+        }
 }
 
 
