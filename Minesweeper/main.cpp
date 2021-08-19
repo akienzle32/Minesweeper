@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
+
 const int ROWS = 5;
 const int COLS = 5;
 
@@ -18,26 +19,26 @@ private:
     int col;
     
 public:
-    void makeBoard(char array[][COLS])
+    void makeBoard(char board[][COLS])
     {
         for (int i = 0; i < COLS; i++)
         {
             for (int j = 0; j < COLS; j++)
             {
-                array[i][j] = '-';
+                board[i][j] = '-';
             }
         }
     }
 
-    void placeMines(char array[][COLS])
+    void placeMines(char board[][COLS])
     {
-        array[0][3] = '*';
-        array[2][1] = '*';
-        array[3][2] = '*';
-        array[4][3] = '*';
+        board[0][3] = '*';
+        board[2][1] = '*';
+        board[3][2] = '*';
+        board[4][3] = '*';
     }
 
-    void printBoard(char array[][COLS])
+    void printBoard(char board[][COLS])
     {
         for (int i = 0; i <= COLS; i++)
         {
@@ -51,21 +52,21 @@ public:
             cout << i+1 << " ";
             for (int j = 0; j < COLS; j++)
             {
-                cout << array[i][j] << " ";
+                cout << board[i][j] << " ";
             }
             cout << endl;
             }
     }
 
-    bool isAlive(char array[][COLS])
+    bool isAlive(char board[][COLS])
     {
         bool result = true;
-        if (array[row][col] == '*')
+        if (board[row][col] == '*')
             result = false;
         return(result);
     }
 
-    void move(char array[][COLS])
+    void move(char board[][COLS])
     {
         int i, j;
         cout << "Pick a spot on the board (row, column):\n";
@@ -73,10 +74,18 @@ public:
         row = i;
         col = j;
         
-        if (array[row][col] == '*')
+        if (board[row][col] == '*')
             cout << "You died!" << endl;
         else
             cout << "You're still alive." << endl;
+    }
+    
+    void updateBoard(char realBoard[][COLS], char gameBoard[][COLS])
+    {
+        if (realBoard[row][col] == '*')
+            gameBoard[row][col] = '*';
+        else
+            gameBoard[row][col] = 'S';
     }
     
 };
@@ -97,6 +106,8 @@ int main() {
     game.move(realBoard);
     cout.setf(ios::boolalpha);
     cout << game.isAlive(realBoard) << endl;
+    game.updateBoard(realBoard, gameBoard);
+    game.printBoard(gameBoard);
     
     return(0);
 }
