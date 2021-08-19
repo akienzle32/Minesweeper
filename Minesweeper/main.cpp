@@ -138,7 +138,7 @@ public:
     
     void updateGame()
     {
-        if (validMove)
+        if (validMove and !hasWon())
         {
             int north = row-1;
             int south = row+1;
