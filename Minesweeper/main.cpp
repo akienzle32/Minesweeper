@@ -8,49 +8,71 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
 const int ROWS = 5;
 const int COLS = 5;
 
-void makeBoard(char array[][COLS])
+class Minesweeper
 {
+private:
+    char* position;
+
+public:
     
-    for (int i = 0; i < COLS; i++)
+    void makeBoard(char array[][COLS])
     {
-        for (int j = 0; j < COLS; j++)
+    
+        for (int i = 0; i < COLS; i++)
         {
-            array[i][j] = '-';
+            for (int j = 0; j < COLS; j++)
+            {
+                array[i][j] = '-';
+            }
         }
     }
-}
 
-void placeMines(char array[][COLS])
-{
-    array[0][3] = '*';
-    array[2][1] = '*';
-    array[3][2] = '*';
-    array[4][3] = '*';
-}
-
-void printBoard(char array[][COLS])
-{
-    for (int i = 0; i <= COLS; i++)
+    void placeMines(char array[][COLS])
     {
-        cout << i << " ";
+        array[0][3] = '*';
+        array[2][1] = '*';
+        array[3][2] = '*';
+        array[4][3] = '*';
     }
-    
-    cout << endl;
-    
-    for (int i = 0; i < COLS; i++)
+
+    void printBoard(char array[][COLS])
     {
-        cout << i+1 << " ";
-        for (int j = 0; j < COLS; j++)
+        for (int i = 0; i <= COLS; i++)
         {
-            cout << array[i][j] << " ";
+            cout << i << " ";
         }
+    
         cout << endl;
-        }
-}
+    
+        for (int i = 0; i < COLS; i++)
+        {
+            cout << i+1 << " ";
+            for (int j = 0; j < COLS; j++)
+            {
+                cout << array[i][j] << " ";
+            }
+            cout << endl;
+            }
+    }
+
+    bool isAlive(char array[][COLS], int i, int j)
+    {
+        bool result = true;
+        if (array[i][j] == '*')
+            result = false;
+        return(result);
+    }
+
+    void move(char array[][COLS], int i, int j)
+    {
+        if (array[i][j] == '*')
+            cout << "You died!" << endl;
+    }
+    
+};
 
 
 int main() {
@@ -63,6 +85,7 @@ int main() {
     printBoard(gameBoard);
     makeBoard(realBoard);
     placeMines(realBoard);
+    move(realBoard, 2, 1);
     
     return(0);
 }
