@@ -99,7 +99,7 @@ public:
         int moves = ROWS * COLS;
         int neededMoves = moves - MINES;
         
-        if (moveCounter == neededMoves)
+        if (moveCounter == neededMoves and realBoard[row][col] != '*')
         {
             result = true;
         }
@@ -221,7 +221,6 @@ public:
             
             if (validMove)
                 updateGame();
-            
         }
         printBoard(realBoard);
     }
