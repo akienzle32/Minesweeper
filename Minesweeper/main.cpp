@@ -13,7 +13,7 @@ using namespace std;
 
 const int ROWS = 5;
 const int COLS = 5;
-const int MINES = 5;
+const int MINES = 20;
 
 class Minesweeper
 {
@@ -99,7 +99,7 @@ public:
         int moves = ROWS * COLS;
         int neededMoves = moves - MINES;
         
-        if (moveCounter == neededMoves+1)
+        if (moveCounter == neededMoves)
         {
             result = true;
             cout << "You won!" << endl;
@@ -204,6 +204,7 @@ public:
     void playGame()
     {
         printBoard(gameBoard);
+        printBoard(realBoard);
         move(realBoard);
         
         if (validMove)
@@ -212,7 +213,7 @@ public:
         while (isAlive() and !hasWon())
         {
             printBoard(gameBoard);
-            //printBoard(realBoard);
+            printBoard(realBoard);
             move(realBoard);
             
             if (validMove)
