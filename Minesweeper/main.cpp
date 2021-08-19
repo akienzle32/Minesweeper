@@ -118,14 +118,15 @@ public:
         
         return(result);
     }
+    
     /*
     bool isValidMove()
     {
         bool result = true;
-        if (!isValidCell(row) or !isValidCell(col))
-        {
-            
-        }
+        if (!isValidCell(row, col))
+            result = false;
+        
+        return(result);
     }
     */
     // Bug for squares that go off board.
