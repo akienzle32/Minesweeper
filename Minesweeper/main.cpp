@@ -8,10 +8,12 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <cstdlib>
 using namespace std;
 
 const int ROWS = 5;
 const int COLS = 5;
+const int MINES = 5;
 
 class Minesweeper
 {
@@ -37,12 +39,26 @@ public:
 
     void placeMines(char board[][COLS])
     {
+        srand(time(0));
+        for (int i = 0; i < MINES; i++)
+        {
+            int randRow = rand() % 5;
+            int randCol = rand() % 5;
+            
+            if (board[randRow][randCol] != '*')
+                board[randRow][randCol] = '*';
+        }
+    }
+    /*
+    void placeMines(char board[][COLS])
+    {
         board[0][3] = '*';
         board[2][1] = '*';
         board[3][2] = '*';
         board[4][3] = '*';
     }
-
+    */
+    
     void printBoard(char board[][COLS])
     {
         cout << "  ";
@@ -74,14 +90,15 @@ public:
 
     void move(char board[][COLS])
     {
-        int i, j;
+        int y, x;
         cout << "Pick a spot on the board (row, column):\n";
-        cin >> i; cin >> j;
+        cin >> y; cin >> x;
         
-        if (i < ROWS and j < COLS){
-            row = i;
-            col = j;
-            
+        
+        if (y < ROWS and x < COLS){
+            row = y;
+            col = x;
+    
             if (board[row][col] == '*')
                 cout << "You died!" << endl;
             else
@@ -114,6 +131,8 @@ public:
     void playGame(char realBoard[][COLS], char gameBoard[][COLS])
     {
         move(realBoard);
+        updateBoard(realBoard, gameBoard);
+        printBoard(gameBoard);
         
         while (isAlive(realBoard))
         {
@@ -128,16 +147,18 @@ int main() {
 
     Minesweeper game;
     
-    char gameBoard[ROWS][COLS];
+    //char gameBoard[ROWS][COLS];
     char realBoard[ROWS][COLS];
     
-    game.makeBoard(gameBoard);
-    game.printBoard(gameBoard);
+    //game.makeBoard(gameBoard);
+    //game.printBoard(gameBoard);
     game.makeBoard(realBoard);
     game.placeMines(realBoard);
+    game.printBoard(realBoard);
     cout << endl;
     
-    game.playGame(realBoard, gameBoard);
+    //game.playGame(realBoard, gameBoard);
+    
     
     return(0);
 }
