@@ -208,21 +208,16 @@ public:
         printBoard(gameBoard);
         printBoard(realBoard);
         move(realBoard);
-    
-        if (validMove)
-            updateGame();
-        else
-            move(realBoard);
         
         while (isAlive() and !hasWon())
         {
+            if (validMove)
+                updateGame();
             printBoard(gameBoard);
             printBoard(realBoard);
             move(realBoard);
-            
-            if (validMove)
-                updateGame();
         }
+        updateGame();
         printBoard(realBoard);
     }
 };
