@@ -23,10 +23,16 @@ private:
     int mineCounter;
     int moveCounter;
     bool validMove;
+    char realBoard[ROWS][COLS];
+    char gameBoard[ROWS][COLS];
     
 public:
     Minesweeper() : row(0), col(0), mineCounter(0), moveCounter(0), validMove(false)
-    {}
+    {
+        makeBoard(realBoard);
+        makeBoard(gameBoard);
+        placeMines();
+    }
     
     void makeBoard(char board[][COLS])
     {
@@ -39,7 +45,7 @@ public:
         }
     }
 
-    void placeMines(char board[][COLS])
+    void placeMines()
     {
         int minesPlaced = 0;
         srand(time(0));
@@ -49,9 +55,9 @@ public:
             int randRow = rand() % 5;
             int randCol = rand() % 5;
             
-            if (board[randRow][randCol] != '*')
+            if (realBoard[randRow][randCol] != '*')
             {
-                board[randRow][randCol] = '*';
+                realBoard[randRow][randCol] = '*';
                 minesPlaced++;
             }
         }
@@ -78,16 +84,16 @@ public:
             }
     }
 
-    bool isAlive(char board[][COLS])
+    bool isAlive()
     {
         bool result = true;
-        if (board[row][col] == '*')
+        if (realBoard[row][col] == '*')
             result = false;
         
         return(result);
     }
     
-    bool hasWon(char board[][COLS])
+    bool hasWon()
     {
         bool result = false;
         int moves = ROWS * COLS;
@@ -130,7 +136,7 @@ public:
         return(result);
     }
     
-    void updateGame(char realBoard[][COLS], char gameBoard[][COLS])
+    void updateGame()
     {
         if (validMove)
         {
@@ -195,25 +201,22 @@ public:
     }
         
     
-    void playGame(char realBoard[][COLS], char gameBoard[][COLS])
+    void playGame()
     {
-        makeBoard(realBoard);
-        placeMines(realBoard);
-        makeBoard(gameBoard);
         printBoard(gameBoard);
         move(realBoard);
         
         if (validMove)
-            updateGame(realBoard, gameBoard);
+            updateGame();
         
-        while (isAlive(realBoard) and !hasWon(realBoard))
+        while (isAlive() and !hasWon())
         {
             printBoard(gameBoard);
-            printBoard(realBoard);
+            //printBoard(realBoard);
             move(realBoard);
             
             if (validMove)
-                updateGame(realBoard, gameBoard);
+                updateGame();
         }
         printBoard(realBoard);
     }
@@ -223,8 +226,8 @@ int main() {
 
     Minesweeper game;
     
-    char gameBoard[ROWS][COLS];
-    char realBoard[ROWS][COLS];
+    //char gameBoard[ROWS][COLS];
+    //char realBoard[ROWS][COLS];
     /*
     game.makeBoard(gameBoard);
     game.printBoard(gameBoard);
@@ -235,7 +238,7 @@ int main() {
     game.updateGame(realBoard, gameBoard);
     game.printBoard(gameBoard);
     */
-    game.playGame(realBoard, gameBoard);
+    game.playGame();
     
     
     return(0);
