@@ -24,9 +24,6 @@ public:
     Minesweeper() : mineCounter(0)
     {}
     
-    ~Minesweeper()
-    {}
-    
     void makeBoard(char board[][COLS])
     {
         for (int i = 0; i < ROWS; i++)
@@ -80,13 +77,19 @@ public:
         int i, j;
         cout << "Pick a spot on the board (row, column):\n";
         cin >> i; cin >> j;
-        row = i;
-        col = j;
         
-        if (board[row][col] == '*')
-            cout << "You died!" << endl;
+        if (i < ROWS and j < COLS){
+            row = i;
+            col = j;
+            
+            if (board[row][col] == '*')
+                cout << "You died!" << endl;
+            else
+                cout << "You're still alive." << endl;
+        }
         else
-            cout << "You're still alive." << endl;
+            cout << "Not a valid move!" << endl;
+    
     }
 
     void updateBoard(char realBoard[][COLS], char gameBoard[][COLS])
@@ -105,9 +108,21 @@ public:
             char charMines = '0' + mineCounter;
             gameBoard[row][col] = charMines;
         }
+        mineCounter = 0;
+    }
+    
+    void playGame(char realBoard[][COLS], char gameBoard[][COLS])
+    {
+        move(realBoard);
+        
+        while (isAlive(realBoard))
+        {
+            move(realBoard);
+            updateBoard(realBoard, gameBoard);
+            printBoard(gameBoard);
+        }
     }
 };
-
 
 int main() {
 
@@ -121,11 +136,8 @@ int main() {
     game.makeBoard(realBoard);
     game.placeMines(realBoard);
     cout << endl;
-    game.move(realBoard);
-    cout.setf(ios::boolalpha);
-    cout << game.isAlive(realBoard) << endl;
-    game.updateBoard(realBoard, gameBoard);
-    game.printBoard(gameBoard);
+    
+    game.playGame(realBoard, gameBoard);
     
     return(0);
 }
