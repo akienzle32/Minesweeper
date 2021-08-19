@@ -22,7 +22,6 @@ private:
     int col;
     int mineCounter;
     bool validMove;
-    //bool isAlive;
     
 public:
     Minesweeper() : row(0), col(0), mineCounter(0), validMove(false)
