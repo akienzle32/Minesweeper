@@ -107,7 +107,7 @@ public:
     
     }
 
-    void updateBoard(char realBoard[][COLS], char gameBoard[][COLS])
+    void updateGame(char realBoard[][COLS], char gameBoard[][COLS])
     {
         if (realBoard[row][col] == '*')
             gameBoard[row][col] = '*';
@@ -141,13 +141,13 @@ public:
         makeBoard(gameBoard);
         printBoard(gameBoard);
         move(realBoard);
-        updateBoard(realBoard, gameBoard);
+        updateGame(realBoard, gameBoard);
         
         while (isAlive(gameBoard))
         {
             printBoard(gameBoard);
             move(realBoard);
-            updateBoard(realBoard, gameBoard);
+            updateGame(realBoard, gameBoard);
         }
         printBoard(gameBoard);
     }
