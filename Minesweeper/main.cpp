@@ -118,6 +118,14 @@ public:
                 mineCounter++;
             if (realBoard[row][col+1] == '*')
                 mineCounter++;
+            if (realBoard[row-1][col-1] == '*')
+                mineCounter++;
+            if (realBoard[row-1][col+1] == '*')
+                mineCounter++;
+            if (realBoard[row+1][col-1] == '*')
+                mineCounter++;
+            if (realBoard[row+1][col+1] == '*')
+                mineCounter++;
             char charMines = '0' + mineCounter;
             gameBoard[row][col] = charMines;
         }
@@ -126,16 +134,17 @@ public:
     
     void playGame(char realBoard[][COLS], char gameBoard[][COLS])
     {
+        printBoard(gameBoard);
         move(realBoard);
         updateBoard(realBoard, gameBoard);
-        printBoard(gameBoard);
         
         while (isAlive(realBoard))
         {
+            printBoard(gameBoard);
             move(realBoard);
             updateBoard(realBoard, gameBoard);
-            printBoard(gameBoard);
         }
+        printBoard(gameBoard);
     }
 };
 
@@ -147,13 +156,13 @@ int main() {
     char realBoard[ROWS][COLS];
     
     game.makeBoard(gameBoard);
-    game.printBoard(gameBoard);
+    //game.printBoard(gameBoard);
     game.makeBoard(realBoard);
     game.placeMines(realBoard);
     //game.printBoard(realBoard);
     cout << endl;
     
-    game.playGame(realBoard, gameBoard);
+    //game.playGame(realBoard, gameBoard);
     
     
     return(0);
