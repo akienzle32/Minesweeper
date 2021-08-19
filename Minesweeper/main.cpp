@@ -162,17 +162,17 @@ int main() {
 
     Minesweeper game;
     
-    //char gameBoard[ROWS][COLS];
+    char gameBoard[ROWS][COLS];
     char realBoard[ROWS][COLS];
     
-    //game.makeBoard(gameBoard);
-    //game.printBoard(gameBoard);
+    game.makeBoard(gameBoard);
+    game.printBoard(gameBoard);
     game.makeBoard(realBoard);
     game.placeMines(realBoard);
-    game.printBoard(realBoard);
+    //game.printBoard(realBoard);
     cout << endl;
     
-    //game.playGame(realBoard, gameBoard);
+    game.playGame(realBoard, gameBoard);
     
     
     return(0);
