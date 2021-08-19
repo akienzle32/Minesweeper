@@ -88,16 +88,7 @@ public:
         else
             cout << "You're still alive." << endl;
     }
-    
-    /*
-    void updateBoard(char realBoard[][COLS], char gameBoard[][COLS])
-    {
-        if (realBoard[row][col] == '*')
-            gameBoard[row][col] = '*';
-        else
-            gameBoard[row][col] = 'S';
-    }
-    */
+
     void updateBoard(char realBoard[][COLS], char gameBoard[][COLS])
     {
         if (realBoard[row][col] == '*')
