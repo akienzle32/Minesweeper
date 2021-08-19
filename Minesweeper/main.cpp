@@ -13,7 +13,7 @@ using namespace std;
 
 const int ROWS = 5;
 const int COLS = 5;
-const int MINES = 5;
+const int MINES = 10;
 
 class Minesweeper
 {
@@ -21,10 +21,11 @@ private:
     int row;
     int col;
     int mineCounter;
+    int moveCounter;
     bool validMove;
     
 public:
-    Minesweeper() : row(0), col(0), mineCounter(0), validMove(false)
+    Minesweeper() : row(0), col(0), mineCounter(0), moveCounter(0), validMove(false)
     {}
     
     void makeBoard(char board[][COLS])
@@ -85,6 +86,21 @@ public:
         
         return(result);
     }
+    
+    bool hasWon(char board[][COLS])
+    {
+        bool result = false;
+        int moves = ROWS * COLS;
+        int neededMoves = moves - MINES;
+        
+        if (moveCounter == neededMoves+1)
+        {
+            result = true;
+            cout << "You won!" << endl;
+        }
+            
+        return(result);
+    }
 
     void move(char board[][COLS])
     {
@@ -95,6 +111,7 @@ public:
         if (isValidCell(y, x))
         {
             validMove = true;
+            moveCounter++;
             row = y;
             col = x;
         }
@@ -189,15 +206,16 @@ public:
         if (validMove)
             updateGame(realBoard, gameBoard);
         
-        while (isAlive(realBoard))
+        while (isAlive(realBoard) and !hasWon(realBoard))
         {
             printBoard(gameBoard);
+            printBoard(realBoard);
             move(realBoard);
             
             if (validMove)
                 updateGame(realBoard, gameBoard);
         }
-        printBoard(gameBoard);
+        printBoard(realBoard);
     }
 };
 
