@@ -21,6 +21,7 @@ private:
     int row;
     int col;
     int mineCounter;
+    //bool isAlive;
     
 public:
     Minesweeper() : mineCounter(0)
@@ -81,6 +82,7 @@ public:
         bool result = true;
         if (board[row][col] == '*')
             result = false;
+        
         return(result);
     }
 
@@ -134,11 +136,15 @@ public:
     
     void playGame(char realBoard[][COLS], char gameBoard[][COLS])
     {
+
+        makeBoard(realBoard);
+        placeMines(realBoard);
+        makeBoard(gameBoard);
         printBoard(gameBoard);
         move(realBoard);
         updateBoard(realBoard, gameBoard);
         
-        while (isAlive(realBoard))
+        while (isAlive(gameBoard))
         {
             printBoard(gameBoard);
             move(realBoard);
@@ -155,14 +161,14 @@ int main() {
     char gameBoard[ROWS][COLS];
     char realBoard[ROWS][COLS];
     
-    game.makeBoard(gameBoard);
+    //game.makeBoard(gameBoard);
     //game.printBoard(gameBoard);
-    game.makeBoard(realBoard);
-    game.placeMines(realBoard);
+    //game.makeBoard(realBoard);
+    //game.placeMines(realBoard);
     //game.printBoard(realBoard);
-    cout << endl;
+    //cout << endl;
     
-    //game.playGame(realBoard, gameBoard);
+    game.playGame(realBoard, gameBoard);
     
     
     return(0);
