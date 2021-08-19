@@ -57,10 +57,10 @@ public:
             }
     }
 
-    bool isAlive(char array[][COLS], int i, int j)
+    bool isAlive(char array[][COLS])
     {
         bool result = true;
-        if (array[i][j] == '*')
+        if (array[row][col] == '*')
             result = false;
         return(result);
     }
@@ -95,6 +95,8 @@ int main() {
     game.placeMines(realBoard);
     cout << endl;
     game.move(realBoard);
+    cout.setf(ios::boolalpha);
+    cout << game.isAlive(realBoard) << endl;
     
     return(0);
 }
