@@ -53,26 +53,7 @@ public:
                 minesPlaced++;
             }
         }
-        /*
-        for (int i = 0; i < MINES; i++)
-        {
-            int randRow = rand() % 5;
-            int randCol = rand() % 5;
-            
-            if (board[randRow][randCol] != '*')
-                board[randRow][randCol] = '*';
-        }
-        */
     }
-    /*
-    void placeMines(char board[][COLS])
-    {
-        board[0][3] = '*';
-        board[2][1] = '*';
-        board[3][2] = '*';
-        board[4][3] = '*';
-    }
-    */
     
     void printBoard(char board[][COLS])
     {
