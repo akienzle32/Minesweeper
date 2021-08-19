@@ -122,6 +122,7 @@ public:
         }
         else
         {
+            validMove = false;
             cout << "Not a valid move!" << endl;
         }
     }
