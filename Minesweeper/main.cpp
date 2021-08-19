@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 using namespace std;
 
 const int ROWS = 5;
@@ -17,11 +18,18 @@ class Minesweeper
 private:
     int row;
     int col;
+    int mineCounter;
     
 public:
+    Minesweeper() : mineCounter(0)
+    {}
+    
+    ~Minesweeper()
+    {}
+    
     void makeBoard(char board[][COLS])
     {
-        for (int i = 0; i < COLS; i++)
+        for (int i = 0; i < ROWS; i++)
         {
             for (int j = 0; j < COLS; j++)
             {
@@ -40,16 +48,17 @@ public:
 
     void printBoard(char board[][COLS])
     {
-        for (int i = 0; i <= COLS; i++)
+        cout << "  ";
+        
+        for (int i = 0; i < ROWS; i++)
         {
             cout << i << " ";
         }
-    
         cout << endl;
     
-        for (int i = 0; i < COLS; i++)
+        for (int i = 0; i < ROWS; i++)
         {
-            cout << i+1 << " ";
+            cout << i << " ";
             for (int j = 0; j < COLS; j++)
             {
                 cout << board[i][j] << " ";
@@ -80,6 +89,7 @@ public:
             cout << "You're still alive." << endl;
     }
     
+    /*
     void updateBoard(char realBoard[][COLS], char gameBoard[][COLS])
     {
         if (realBoard[row][col] == '*')
@@ -87,7 +97,24 @@ public:
         else
             gameBoard[row][col] = 'S';
     }
-    
+    */
+    void updateBoard(char realBoard[][COLS], char gameBoard[][COLS])
+    {
+        if (realBoard[row][col] == '*')
+            gameBoard[row][col] = '*';
+        else {
+            if (realBoard[row-1][col] == '*')
+                mineCounter++;
+            if (realBoard[row+1][col] == '*')
+                mineCounter++;
+            if (realBoard[row][col-1] == '*')
+                mineCounter++;
+            if (realBoard[row][col+1] == '*')
+                mineCounter++;
+            char charMines = '0' + mineCounter;
+            gameBoard[row][col] = charMines;
+        }
+    }
 };
 
 
