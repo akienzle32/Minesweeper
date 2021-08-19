@@ -39,7 +39,21 @@ public:
 
     void placeMines(char board[][COLS])
     {
+        int minesPlaced = 0;
         srand(time(0));
+        
+        while (minesPlaced < MINES)
+        {
+            int randRow = rand() % 5;
+            int randCol = rand() % 5;
+            
+            if (board[randRow][randCol] != '*')
+            {
+                board[randRow][randCol] = '*';
+                minesPlaced++;
+            }
+        }
+        /*
         for (int i = 0; i < MINES; i++)
         {
             int randRow = rand() % 5;
@@ -48,6 +62,7 @@ public:
             if (board[randRow][randCol] != '*')
                 board[randRow][randCol] = '*';
         }
+        */
     }
     /*
     void placeMines(char board[][COLS])
