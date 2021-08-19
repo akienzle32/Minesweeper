@@ -21,10 +21,11 @@ private:
     int row;
     int col;
     int mineCounter;
+    bool validMove;
     //bool isAlive;
     
 public:
-    Minesweeper() : mineCounter(0)
+    Minesweeper() : row(0), col(0), mineCounter(0), validMove(false)
     {}
     
     void makeBoard(char board[][COLS])
@@ -92,21 +93,21 @@ public:
         cout << "Pick a spot on the board (row, column):\n";
         cin >> y; cin >> x;
         
-        
         if (isValidCell(y, x))
         {
+            validMove = true;
             row = y;
             col = x;
-    
+            /*
             if (board[row][col] == '*')
                 cout << "You died!" << endl;
             else
                 cout << "You're still alive." << endl;
+             */
         }
         else
         {
             cout << "Not a valid move!" << endl;
-            
         }
     }
     
@@ -119,7 +120,6 @@ public:
         return(result);
     }
     
-    /*
     bool isValidMove()
     {
         bool result = true;
@@ -128,65 +128,71 @@ public:
         
         return(result);
     }
-    */
     // Bug for squares that go off board.
     void updateGame(char realBoard[][COLS], char gameBoard[][COLS])
     {
-        int north = row-1;
-        int south = row+1;
-        int east = col+1;
-        int west = col-1;
+        if (validMove)
+        {
+            int north = row-1;
+            int south = row+1;
+            int east = col+1;
+            int west = col-1;
         
-        if (realBoard[row][col] == '*')
-            gameBoard[row][col] = '*';
-        
-        else {
-            if (isValidCell(north, col))
+            if (realBoard[row][col] == '*')
             {
-                if (realBoard[north][col] == '*')
-                    mineCounter++;
+                gameBoard[row][col] = '*';
+                cout << "You died!" << endl;
             }
-            if (isValidCell(south, col))
-            {
-                if (realBoard[south][col] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(row, east))
-            {
-                if (realBoard[row][east] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(row, west))
-            {
-                if (realBoard[row][col-1] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(north, west))
-            {
-                if (realBoard[north][west] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(north, east))
-            {
-                if (realBoard[north][east] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(south, west))
-            {
-                if (realBoard[south][west] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(south, east))
-            {
-                if (realBoard[south][east] == '*')
-                    mineCounter++;
-            }
+            else {
+                if (isValidCell(north, col))
+                {
+                    if (realBoard[north][col] == '*')
+                        mineCounter++;
+                }
+                if (isValidCell(south, col))
+                {
+                    if (realBoard[south][col] == '*')
+                        mineCounter++;
+                }
+                if (isValidCell(row, east))
+                {
+                    if (realBoard[row][east] == '*')
+                        mineCounter++;
+                }
+                if (isValidCell(row, west))
+                {
+                    if (realBoard[row][col-1] == '*')
+                        mineCounter++;
+                }
+                if (isValidCell(north, west))
+                {
+                    if (realBoard[north][west] == '*')
+                        mineCounter++;
+                }
+                if (isValidCell(north, east))
+                {
+                    if (realBoard[north][east] == '*')
+                        mineCounter++;
+                }
+                if (isValidCell(south, west))
+                {
+                    if (realBoard[south][west] == '*')
+                        mineCounter++;
+                }
+                if (isValidCell(south, east))
+                {
+                    if (realBoard[south][east] == '*')
+                        mineCounter++;
+                }
             
-            char charMines = '0' + mineCounter;
-            gameBoard[row][col] = charMines;
+                char charMines = '0' + mineCounter;
+                gameBoard[row][col] = charMines;
+                cout << "You're still alive." << endl;
+            }
+            mineCounter = 0;
         }
-        mineCounter = 0;
     }
+        
     
     void playGame(char realBoard[][COLS], char gameBoard[][COLS])
     {
@@ -195,13 +201,17 @@ public:
         makeBoard(gameBoard);
         printBoard(gameBoard);
         move(realBoard);
-        updateGame(realBoard, gameBoard);
+        
+        if (validMove)
+            updateGame(realBoard, gameBoard);
         
         while (isAlive(realBoard))
         {
             printBoard(gameBoard);
             move(realBoard);
-            updateGame(realBoard, gameBoard);
+            
+            if (validMove)
+                updateGame(realBoard, gameBoard);
         }
         printBoard(gameBoard);
     }
@@ -213,7 +223,6 @@ int main() {
     
     char gameBoard[ROWS][COLS];
     char realBoard[ROWS][COLS];
-    
     /*
     game.makeBoard(gameBoard);
     game.printBoard(gameBoard);
