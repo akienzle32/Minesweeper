@@ -118,6 +118,7 @@ void Minesweeper::move()
     }
 }
 
+// Function to determine if a cell is on the board.
 bool Minesweeper::isValidCell(int y, int x)
 {
     bool result = false;
