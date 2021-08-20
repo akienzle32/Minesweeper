@@ -13,7 +13,7 @@ using namespace std;
 
 const int ROWS = 5;
 const int COLS = 5;
-const int MINES = 5;
+const int MINES = 7;
 
 class Minesweeper
 {
