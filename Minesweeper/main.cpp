@@ -119,7 +119,6 @@ public:
         }
         else
         {
-            //validMove = true;
             moveCounter++;
             row = y;
             col = x;
@@ -223,21 +222,7 @@ public:
 int main() {
 
     Minesweeper game;
-    
-    //char gameBoard[ROWS][COLS];
-    //char realBoard[ROWS][COLS];
-    /*
-    game.makeBoard(gameBoard);
-    game.printBoard(gameBoard);
-    game.makeBoard(realBoard);
-    game.placeMines(realBoard);
-    game.printBoard(realBoard);
-    game.move(gameBoard);
-    game.updateGame(realBoard, gameBoard);
-    game.printBoard(gameBoard);
-    */
     game.playGame();
-    
     
     return(0);
 }
