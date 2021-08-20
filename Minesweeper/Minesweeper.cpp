@@ -33,6 +33,7 @@ void Minesweeper::placeMines()
     int minesPlaced = 0;
     srand(time(0));
     
+    // Randomly drop the amount of mines determined by the MINES global constant.
     while (minesPlaced < MINES)
     {
         int randRow = rand() % 5;
@@ -50,12 +51,15 @@ void Minesweeper::printBoard(char board[][COLS])
 {
     std::cout << "  ";
     
+    // Print column numbers first.
     for (int i = 0; i < ROWS; i++)
     {
         std::cout << i << " ";
     }
     std::cout << std::endl;
-
+    
+    // Then print row numbers, along with a properly spaced version of the
+    // the board.
     for (int i = 0; i < ROWS; i++)
     {
         std::cout << i << " ";
@@ -76,6 +80,9 @@ bool Minesweeper::isAlive()
     return(result);
 }
 
+// This function determines if the player has won by subtracting the amount of mines on the
+// board from the amount of moves made thus far. If the player has made this requisite
+// number of valid moves without dying, then they win.
 bool Minesweeper::hasWon()
 {
     bool result = false;
@@ -90,6 +97,8 @@ bool Minesweeper::hasWon()
     return(result);
 }
 
+// Set row and column variables to values determined by the player (if the values
+// are valid based on the size of the rows and columns).
 void Minesweeper::move()
 {
     int y, x;
@@ -118,6 +127,9 @@ bool Minesweeper::isValidCell(int y, int x)
     return(result);
 }
 
+// This function counts the number of adjacent mines to the selected cell and
+// displays that number in the selected cell. It also prints messages if the player
+// has either won or lost. 
 void Minesweeper::updateGame()
 {
     if (!hasWon())
@@ -199,6 +211,7 @@ void Minesweeper::playGame()
     cheatGame();
     move();
     
+    // Continue playing as long as the player is alive and has not won yet.
     while (isAlive() and !hasWon())
     {
         updateGame();
