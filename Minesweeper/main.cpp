@@ -22,11 +22,12 @@ private:
     int col;
     int mineCounter;
     int moveCounter;
+    bool cheat;
     char realBoard[ROWS][COLS];
     char gameBoard[ROWS][COLS];
     
 public:
-    Minesweeper() : row(0), col(0), mineCounter(0), moveCounter(0)
+    Minesweeper() : row(0), col(0), mineCounter(0), moveCounter(0), cheat(false)
     {
         makeBoard(realBoard);
         makeBoard(gameBoard);
@@ -198,19 +199,27 @@ public:
         else
             cout << "You won!" << endl;
     }
-        
+    
+    // This function allows the user to cheat by displaying the realBoard (i.e., the
+    // one with the mines in it) once at the beginning of the game. This setting can be
+    // changed simply by switching the boolean cheat variable in the Minesweeper
+    // constructor.
+    void cheatGame()
+    {
+        if (cheat)
+            printBoard(realBoard);
+    }
     
     void playGame()
     {
         printBoard(gameBoard);
-        //printBoard(realBoard);
+        cheatGame();
         move();
         
         while (isAlive() and !hasWon())
         {
             updateGame();
             printBoard(gameBoard);
-            //printBoard(realBoard);
             cout << "You're still alive." << endl;
             move();
         }
