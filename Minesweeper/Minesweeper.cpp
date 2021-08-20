@@ -120,16 +120,16 @@ void Minesweeper::move()
 
 bool Minesweeper::isValidCell(int y, int x)
 {
-    bool result = true;
-    if ((y < 0 or y > (ROWS-1) or (x < 0 or x > (COLS-1))))
-        result = false;
+    bool result = false;
+    if ((y >= 0 and y < ROWS) and (x >= 0 and x < COLS))
+        result = true;
     
     return(result);
 }
 
 // This function counts the number of adjacent mines to the selected cell and
 // displays that number in the selected cell. It also prints messages if the player
-// has either won or lost. 
+// has either won or lost.
 void Minesweeper::updateGame()
 {
     if (!hasWon())
