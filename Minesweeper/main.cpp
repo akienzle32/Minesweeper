@@ -13,7 +13,7 @@ using namespace std;
 
 const int ROWS = 5;
 const int COLS = 5;
-const int MINES = 22;
+const int MINES = 5;
 
 class Minesweeper
 {
@@ -80,7 +80,7 @@ public:
                 cout << board[i][j] << " ";
             }
             cout << endl;
-            }
+        }
     }
 
     bool isAlive()
@@ -193,7 +193,6 @@ public:
             
                 char charMines = '0' + mineCounter;
                 gameBoard[row][col] = charMines;
-                cout << "You're still alive." << endl;
             }
             mineCounter = 0;
         }
@@ -205,18 +204,19 @@ public:
     void playGame()
     {
         printBoard(gameBoard);
-        printBoard(realBoard);
+        //printBoard(realBoard);
         move();
         
         while (isAlive() and !hasWon())
         {
             updateGame();
             printBoard(gameBoard);
-            printBoard(realBoard);
+            //printBoard(realBoard);
+            cout << "You're still alive." << endl;
             move();
         }
-        updateGame();
         printBoard(realBoard);
+        updateGame();
     }
 };
 
