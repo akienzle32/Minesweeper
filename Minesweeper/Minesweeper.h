@@ -20,6 +20,7 @@ private:
     int mineCounter;
     int moveCounter;
     bool cheat;
+    bool duplicateMove;
     char realBoard[ROWS][COLS];
     char gameBoard[ROWS][COLS];
     

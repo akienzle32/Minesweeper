@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include "Minesweeper.h"
 
-Minesweeper::Minesweeper() : row(0), col(0), mineCounter(0), moveCounter(0), cheat(true)
+Minesweeper::Minesweeper() : row(0), col(0), mineCounter(0), moveCounter(0), duplicateMove(false), cheat(true)
 {
     makeBoard(realBoard);
     makeBoard(gameBoard);
@@ -107,6 +107,8 @@ void Minesweeper::move()
     std::cout << "Pick a spot on the board (row, column):\n";
     std::cin >> y; std::cin >> x;
     
+    char array[9] = {'0', '1', '2', '3', '4', '5', '6', '7', '8'};
+    
     if (!isValidCell(y, x))
     {
         std::cout << "Not a valid move!" << std::endl;
@@ -118,12 +120,15 @@ void Minesweeper::move()
         row = y;
         col = x;
         
-        char array[9] = {'0', '1', '2', '3', '4', '5', '6', '7', '8'};
         
         for (int i = 0; i < 9; i++)
         {
             if (gameBoard[row][col] == array[i])
+            {
                 moveCounter--;
+                duplicateMove = true;
+                std::cout << "You already chose this cell." << std::endl;
+            }
         }
     }
 }
