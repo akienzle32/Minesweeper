@@ -10,7 +10,7 @@
 
 const int ROWS = 5;
 const int COLS = 5;
-const int MINES = 6;
+const int MINES = 22;
 
 class Minesweeper
 {

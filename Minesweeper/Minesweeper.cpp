@@ -83,6 +83,8 @@ bool Minesweeper::isAlive()
 // This function determines if the player has won by subtracting the amount of mines on the
 // board from the amount of moves made thus far. If the player has made this requisite
 // number of valid moves without dying, then they win.
+
+// Probably has bug if the user selects the same cell twice.
 bool Minesweeper::hasWon()
 {
     bool result = false;
@@ -115,6 +117,14 @@ void Minesweeper::move()
         moveCounter++;
         row = y;
         col = x;
+        
+        char array[9] = {'0', '1', '2', '3', '4', '5', '6', '7', '8'};
+        
+        for (int i = 0; i < 9; i++)
+        {
+            if (gameBoard[row][col] == array[i])
+                moveCounter--;
+        }
     }
 }
 
