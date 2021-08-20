@@ -22,12 +22,11 @@ private:
     int col;
     int mineCounter;
     int moveCounter;
-    bool validMove;
     char realBoard[ROWS][COLS];
     char gameBoard[ROWS][COLS];
     
 public:
-    Minesweeper() : row(0), col(0), mineCounter(0), moveCounter(0), validMove(false)
+    Minesweeper() : row(0), col(0), mineCounter(0), moveCounter(0)
     {
         makeBoard(realBoard);
         makeBoard(gameBoard);
@@ -107,23 +106,23 @@ public:
         return(result);
     }
 
-    void move(char board[][COLS])
+    void move()
     {
         int y, x;
         cout << "Pick a spot on the board (row, column):\n";
         cin >> y; cin >> x;
         
-        if (isValidCell(y, x))
+        if (!isValidCell(y, x))
         {
-            validMove = true;
-            moveCounter++;
-            row = y;
-            col = x;
+            cout << "Not a valid move!" << endl;
+            move();
         }
         else
         {
-            validMove = false;
-            cout << "Not a valid move!" << endl;
+            //validMove = true;
+            moveCounter++;
+            row = y;
+            col = x;
         }
     }
     
@@ -138,7 +137,7 @@ public:
     
     void updateGame()
     {
-        if (validMove and !hasWon())
+        if (!hasWon())
         {
             int north = row-1;
             int south = row+1;
@@ -198,7 +197,7 @@ public:
             }
             mineCounter = 0;
         }
-        else if (validMove and hasWon())
+        else
             cout << "You won!" << endl;
     }
         
@@ -207,15 +206,14 @@ public:
     {
         printBoard(gameBoard);
         printBoard(realBoard);
-        move(realBoard);
+        move();
         
         while (isAlive() and !hasWon())
         {
-            if (validMove)
-                updateGame();
+            updateGame();
             printBoard(gameBoard);
             printBoard(realBoard);
-            move(realBoard);
+            move();
         }
         updateGame();
         printBoard(realBoard);
