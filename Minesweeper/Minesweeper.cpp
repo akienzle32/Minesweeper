@@ -151,64 +151,37 @@ void Minesweeper::updateGame()
     if (!hasWon())
     {
         int north = row-1;
-        int south = row+1;
-        int east = col+1;
+        int south = row+2;
         int west = col-1;
-    
+        int east = col+2;
+
         if (realBoard[row][col] == '*')
         {
             gameBoard[row][col] = '*';
             std::cout << "You died!" << std::endl;
         }
-        else {
-            if (isValidCell(north, col))
-            {
-                if (realBoard[north][col] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(south, col))
-            {
-                if (realBoard[south][col] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(row, east))
-            {
-                if (realBoard[row][east] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(row, west))
-            {
-                if (realBoard[row][col-1] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(north, west))
-            {
-                if (realBoard[north][west] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(north, east))
-            {
-                if (realBoard[north][east] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(south, west))
-            {
-                if (realBoard[south][west] == '*')
-                    mineCounter++;
-            }
-            if (isValidCell(south, east))
-            {
-                if (realBoard[south][east] == '*')
-                    mineCounter++;
-            }
         
-            char charMines = '0' + mineCounter;
-            gameBoard[row][col] = charMines;
+        else
+        {
+            for (int i = north; i < south; i++)
+            {
+                for (int  j = west; j < east; j++)
+                {
+                    if (isValidCell(i, j))
+                    {
+                        if (realBoard[i][j] == '*')
+                            mineCounter++;
+                    }
+                }
+                char charMines = mineCounter + '0';
+                gameBoard[row][col] = charMines;
+            }
+            mineCounter = 0;
         }
-        mineCounter = 0;
     }
     else
         std::cout << "You won!" << std::endl;
+
 }
 
 // This function allows the user to cheat by displaying the realBoard (i.e., the
