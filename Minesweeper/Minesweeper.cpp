@@ -47,6 +47,8 @@ void Minesweeper::placeMines()
     }
 }
 
+// This function counts all the mines immediately adjacent to a given cell,
+// and returns this number as a character.
 char Minesweeper::countMines(char board[][COLS], int y, int x)
 {
     char charMines = '-';
@@ -73,12 +75,13 @@ char Minesweeper::countMines(char board[][COLS], int y, int x)
                 charMines = mineCounter + '0';
             }
         }
-        mineCounter = 0;
     }
     return(charMines);
 }
 
-void Minesweeper::reveal(char board[][COLS])
+// This function counts all the adjacent mines to every cell on the board
+// and displays this number in the cell.
+void Minesweeper::countAndReveal(char board[][COLS])
 {
     for (int i = 0; i < ROWS; i++)
     {
@@ -242,7 +245,7 @@ void Minesweeper::testGame()
 {
     printBoard(gameBoard);
     printBoard(realBoard);
-    reveal(realBoard);
+    countAndReveal(realBoard);
     printBoard(realBoard);
     move();
     updateGame();

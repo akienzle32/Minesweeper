@@ -10,7 +10,7 @@
 
 const int ROWS = 5;
 const int COLS = 5;
-const int MINES = 22;
+const int MINES = 2;
 
 class Minesweeper
 {
@@ -38,7 +38,7 @@ public:
     
     char countMines(char board[][COLS], int y, int x);
     
-    void reveal(char board[][COLS]);
+    void countAndReveal(char board[][COLS]);
     
     void printBoard(char board[][COLS]);
 
