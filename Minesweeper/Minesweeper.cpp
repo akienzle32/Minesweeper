@@ -47,8 +47,9 @@ void Minesweeper::placeMines()
     }
 }
 
-void Minesweeper::countMines(char board[][COLS], int y, int x)
+char Minesweeper::countMines(char board[][COLS], int y, int x)
 {
+    char charMines = '-';
     if (isValidCell(y, x))
     {
         int mineCounter = 0;
@@ -69,12 +70,12 @@ void Minesweeper::countMines(char board[][COLS], int y, int x)
                             mineCounter++;
                     }
                 }
-                char charMines = mineCounter + '0';
-                board[y][x] = charMines;
+                charMines = mineCounter + '0';
             }
         }
         mineCounter = 0;
     }
+    return(charMines);
 }
 
 void Minesweeper::reveal(char board[][COLS])
@@ -85,7 +86,7 @@ void Minesweeper::reveal(char board[][COLS])
         {
             if (board[i][j] != '*')
             {
-                countMines(board, i, j);
+                board[i][j] = countMines(board, i, j);
             }
         }
     }
@@ -193,11 +194,6 @@ void Minesweeper::updateGame()
 {
     if (!hasWon())
     {
-        int north = row-1;
-        int south = row+2;
-        int west = col-1;
-        int east = col+2;
-
         if (realBoard[row][col] == '*')
         {
             gameBoard[row][col] = '*';
@@ -206,20 +202,7 @@ void Minesweeper::updateGame()
         
         else
         {
-            for (int i = north; i < south; i++)
-            {
-                for (int  j = west; j < east; j++)
-                {
-                    if (isValidCell(i, j))
-                    {
-                        if (realBoard[i][j] == '*')
-                            mineCounter++;
-                    }
-                }
-                char charMines = mineCounter + '0';
-                gameBoard[row][col] = charMines;
-            }
-            mineCounter = 0;
+            gameBoard[row][col] = countMines(realBoard, row, col);
         }
     }
     else
@@ -259,8 +242,11 @@ void Minesweeper::testGame()
 {
     printBoard(gameBoard);
     printBoard(realBoard);
-    countMines(realBoard, 1, 2);
+    reveal(realBoard);
     printBoard(realBoard);
+    move();
+    updateGame();
+    printBoard(gameBoard);
 }
 
 
