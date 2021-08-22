@@ -180,6 +180,28 @@ void Minesweeper::move()
     }
 }
 
+void Minesweeper::fill(int y, int x)
+{
+    if (!isValidCell(y, x))
+        return;
+    if (realBoard[y][x] != '0')
+        return;
+    if (gameBoard[y][x] == '0')
+        return;
+    
+    gameBoard[y][x] = '0';
+    
+    int north = y-1;
+    int south = y+1;
+    int west = x-1;
+    int east = x+1;
+    
+    fill(north, x);
+    fill(south, x);
+    fill(east, y);
+    fill(west, y);
+}
+
 // Function to determine if a cell is on the board.
 bool Minesweeper::isValidCell(int y, int x)
 {

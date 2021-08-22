@@ -44,6 +44,8 @@ public:
 
     void move();
     
+    void fill(int y, int x);
+    
     void updateGame();
     
     void cheatGame();
