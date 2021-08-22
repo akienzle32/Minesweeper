@@ -47,6 +47,50 @@ void Minesweeper::placeMines()
     }
 }
 
+void Minesweeper::countMines(char board[][COLS], int y, int x)
+{
+    if (isValidCell(y, x))
+    {
+        int mineCounter = 0;
+        if (board[y][x] != '*')
+        {
+            int north = y-1;
+            int south = y+2;
+            int west = x-1;
+            int east = x+2;
+    
+            for (int i = north; i < south; i++)
+            {
+                for (int  j = west; j < east; j++)
+                {
+                    if (isValidCell(i, j))
+                    {
+                        if (board[i][j] == '*')
+                            mineCounter++;
+                    }
+                }
+                char charMines = mineCounter + '0';
+                board[y][x] = charMines;
+            }
+        }
+        mineCounter = 0;
+    }
+}
+
+void Minesweeper::reveal(char board[][COLS])
+{
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            if (board[i][j] != '*')
+            {
+                countMines(board, i, j);
+            }
+        }
+    }
+}
+
 void Minesweeper::printBoard(char board[][COLS])
 {
     std::cout << "  ";
@@ -210,3 +254,13 @@ void Minesweeper::playGame()
     printBoard(realBoard);
     updateGame();
 }
+
+void Minesweeper::testGame()
+{
+    printBoard(gameBoard);
+    printBoard(realBoard);
+    countMines(realBoard, 1, 2);
+    printBoard(realBoard);
+}
+
+
