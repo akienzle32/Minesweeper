@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include "Minesweeper.h"
 
-Minesweeper::Minesweeper() : row(0), col(0), mineCounter(0), moveCounter(0), cheat(true)
+Minesweeper::Minesweeper() : row(0), col(0), mineCounter(0), moveCounter(0), revealedCells(0), cheat(true)
 {
     makeBoard(realBoard);
     makeBoard(gameBoard);
@@ -134,6 +134,7 @@ bool Minesweeper::isAlive()
 // number of valid moves without dying, then they win.
 
 // Probably has bugs with new fill() function.
+/*
 bool Minesweeper::hasWon()
 {
     bool result = false;
@@ -145,6 +146,24 @@ bool Minesweeper::hasWon()
         result = true;
     }
         
+    return(result);
+}
+*/
+
+bool Minesweeper::hasWon()
+{
+    bool result = false;
+    int magicNumber = (ROWS * COLS) - MINES;
+    
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            if (revealedCells == magicNumber)
+                result = true;
+        }
+    }
+    
     return(result);
 }
 
@@ -166,6 +185,7 @@ void Minesweeper::move()
     else
     {
         moveCounter++;
+        revealedCells++;
         row = y;
         col = x;
         
@@ -175,6 +195,7 @@ void Minesweeper::move()
             if (gameBoard[row][col] == digitArray[i])
             {
                 moveCounter--;
+                revealedCells--;
                 std::cout << "You already chose this cell." << std::endl;
             }
         }
@@ -191,6 +212,7 @@ void Minesweeper::fill(int y, int x)
         return;
     
     gameBoard[y][x] = '0';
+    revealedCells++;
     
     int north = y-1;
     int south = y+1;
