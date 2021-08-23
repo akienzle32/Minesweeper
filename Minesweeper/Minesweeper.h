@@ -8,9 +8,9 @@
 #ifndef Minesweeper_h
 #define Minesweeper_h
 
-const int ROWS = 5;
-const int COLS = 5;
-const int MINES = 22;
+const int ROWS = 3;
+const int COLS = 3;
+const int MINES = 2;
 
 class Minesweeper
 {

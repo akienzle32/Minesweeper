@@ -153,16 +153,20 @@ bool Minesweeper::hasWon()
 bool Minesweeper::hasWon()
 {
     bool result = false;
-    int magicNumber = ((ROWS * COLS) - MINES) + 1;
+    int dashCounter = 0;
+    int magicNumber = MINES+1;
     
     for (int i = 0; i < ROWS; i++)
     {
         for (int j = 0; j < COLS; j++)
         {
-            if (revealedCells == magicNumber and realBoard[row][col] != '*')
-                result = true;
+            if (gameBoard[i][j] == '-')
+                dashCounter++;
         }
     }
+    
+    if (dashCounter == magicNumber)
+        result = true;
     
     return(result);
 }
@@ -184,7 +188,7 @@ void Minesweeper::move()
     }
     else
     {
-        moveCounter++;
+        //moveCounter++;
         revealedCells++;
         row = y;
         col = x;
@@ -194,7 +198,6 @@ void Minesweeper::move()
         {
             if (gameBoard[row][col] == digitArray[i])
             {
-                moveCounter--;
                 revealedCells--;
                 std::cout << "You already chose this cell." << std::endl;
             }
@@ -249,6 +252,7 @@ void Minesweeper::updateGame()
         }
         else if (realBoard[row][col] == '0')
             fill(row, col);
+            //Maybe add revealed cells++ here.
         else
         {
             gameBoard[row][col] = countMines(realBoard, row, col);
