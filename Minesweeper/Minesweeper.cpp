@@ -37,8 +37,8 @@ void Minesweeper::placeMines()
     // Randomly drop the amount of mines determined by the MINES global constant.
     while (minesPlaced < MINES)
     {
-        int randRow = rand() % 5;
-        int randCol = rand() % 5;
+        int randRow = rand() % ROWS;
+        int randCol = rand() % COLS;
         
         if (realBoard[randRow][randCol] != '*')
         {
@@ -133,7 +133,7 @@ bool Minesweeper::isAlive()
 // board from the amount of moves made thus far. If the player has made this requisite
 // number of valid moves without dying, then they win.
 
-// Probably has bug if the user selects the same cell twice.
+// Probably has bugs with new fill() function.
 bool Minesweeper::hasWon()
 {
     bool result = false;
@@ -271,9 +271,6 @@ void Minesweeper::testGame()
     printBoard(realBoard);
     //countAndReveal(realBoard);
     //printBoard(realBoard);
-    move();
-    updateGame();
-    printBoard(gameBoard);
 }
 
 
