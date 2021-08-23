@@ -153,7 +153,7 @@ bool Minesweeper::hasWon()
 bool Minesweeper::hasWon()
 {
     bool result = false;
-    int magicNumber = (ROWS * COLS) - MINES;
+    int magicNumber = ((ROWS * COLS) - MINES) + 1;
     
     for (int i = 0; i < ROWS; i++)
     {
