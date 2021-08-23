@@ -156,6 +156,16 @@ bool Minesweeper::hasWon()
     return(result);
 }
 
+// Function to determine if a cell is on the board.
+bool Minesweeper::isValidCell(int y, int x)
+{
+    bool result = false;
+    if ((y >= 0 and y < ROWS) and (x >= 0 and x < COLS))
+        result = true;
+    
+    return(result);
+}
+
 // Set row and column variables to values determined by the player (if the values
 // are valid based on the size of the rows and columns). Also, inform the user if
 // they have selected this cell before.
@@ -211,16 +221,6 @@ void Minesweeper::zeroFill(int y, int x)
     zeroFill(y, east);
 }
 
-// Function to determine if a cell is on the board.
-bool Minesweeper::isValidCell(int y, int x)
-{
-    bool result = false;
-    if ((y >= 0 and y < ROWS) and (x >= 0 and x < COLS))
-        result = true;
-    
-    return(result);
-}
-
 // This function updates the game appropriately based on the user's choice of cell.
 void Minesweeper::updateGame()
 {
@@ -238,7 +238,6 @@ void Minesweeper::updateGame()
         }
     else
         std::cout << "You won!" << std::endl;
-
 }
 
 // This function allows the user to cheat by displaying the realBoard (i.e., the
