@@ -21,11 +21,11 @@ Minesweeper::Minesweeper() : row(0), col(0), cheat(true)
     //placeMines();
     //countAndReveal(realBoard);
 }
-/*
+
 bool Minesweeper::isAlive()
 {
     bool result = true;
-    if (realBoard[row][col] == '*')
+    if (realBoard.getCellContents(row, col) == '*')
         result = false;
     
     return(result);
@@ -43,12 +43,12 @@ bool Minesweeper::hasWon()
     {
         for (int j = 0; j < COLS; j++)
         {
-            if (gameBoard[i][j] == '-')
+            if (gameBoard.getCellContents(i, j) == '-')
                 dashCounter++;
         }
     }
     
-    if (dashCounter == magicNumber and realBoard[row][col] != '*')
+    if (dashCounter == magicNumber and realBoard.getCellContents(row, col) != '*')
         result = true;
     
     return(result);
@@ -65,7 +65,7 @@ void Minesweeper::move()
     
     char digitArray[9] = {'0', '1', '2', '3', '4', '5', '6', '7', '8'};
     
-    if (!isValidCell(y, x))
+    if (!gameBoard.isValidCell(y, x))
     {
         std::cout << "Not a valid move!" << std::endl;
         move();
@@ -77,14 +77,14 @@ void Minesweeper::move()
         
         for (int i = 0; i < 9; i++)
         {
-            if (gameBoard[row][col] == digitArray[i])
+            if (gameBoard.getCellContents(row, col) == digitArray[i])
             {
                 std::cout << "You already chose this cell." << std::endl;
             }
         }
     }
 }
-
+/*
 // Recursive "floodfill" function to show the user all connecting cells bordered by zero
 // mines if they have selected a cell bordered by zero mines.
 void Minesweeper::zeroFill(int y, int x)
@@ -109,7 +109,7 @@ void Minesweeper::zeroFill(int y, int x)
     zeroFill(y, east);
 }
 
-
+*/
 // This function updates the game appropriately based on the user's choice of cell.
 void Minesweeper::updateGame()
 {
@@ -128,7 +128,7 @@ void Minesweeper::updateGame()
     else
         std::cout << "You won!" << std::endl;
 }
-
+/*
 // This function allows the user to cheat by displaying the realBoard (i.e., the
 // one with the mines on it) once at the beginning of the game. It is called within
 // the playGame() function, so that its setting can simply be changed by switching
@@ -162,6 +162,7 @@ void Minesweeper::testGame()
 {
     gameBoard.printBoard();
     realBoard.printBoard();
+    move();
     //countAndReveal(realBoard);
     //printBoard(realBoard);
 }
