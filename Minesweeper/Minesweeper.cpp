@@ -166,8 +166,8 @@ bool Minesweeper::isValidCell(int y, int x)
 }
 
 // Set row and column variables to values determined by the player (if the values
-// are valid based on the size of the rows and columns). Also, inform the user if
-// they have selected this cell before.
+// are valid based on the size of the rows and columns). The function allows the user
+// to input these values as standard x,y coordinates (i.e., column first, then row). 
 void Minesweeper::move()
 {
     int y, x;
@@ -183,8 +183,8 @@ void Minesweeper::move()
     }
     else
     {
-        row = y;
-        col = x;
+        row = x;
+        col = y;
         
         for (int i = 0; i < 9; i++)
         {
