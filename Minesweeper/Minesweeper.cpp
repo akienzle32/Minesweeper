@@ -103,7 +103,7 @@ void Minesweeper::printBoard(char board[][COLS])
     std::cout << "  ";
     
     // Print column numbers first.
-    for (int i = 0; i < ROWS; i++)
+    for (int i = 0; i < COLS; i++)
     {
         std::cout << i << " ";
     }
@@ -232,7 +232,6 @@ void Minesweeper::updateGame()
         }
         else if (realBoard[row][col] == '0')
             fill(row, col);
-            //Maybe add revealed cells++ here.
         else
         {
             gameBoard[row][col] = countMines(realBoard, row, col);
@@ -243,7 +242,7 @@ void Minesweeper::updateGame()
 }
 
 // This function allows the user to cheat by displaying the realBoard (i.e., the
-// one with the mines in it) once at the beginning of the game. It is called within
+// one with the mines on it) once at the beginning of the game. It is called within
 // the playGame() function, so that its setting can simply be changed by switching
 // the boolean cheat variable in the Minesweeper constructor.
 void Minesweeper::cheatGame()
