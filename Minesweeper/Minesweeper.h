@@ -17,9 +17,6 @@ class Minesweeper
 private:
     int row;
     int col;
-    int mineCounter;
-    int moveCounter;
-    int revealedCells;
     bool cheat;
     char realBoard[ROWS][COLS];
     char gameBoard[ROWS][COLS];
