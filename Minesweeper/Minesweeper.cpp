@@ -84,19 +84,19 @@ void Minesweeper::move()
         }
     }
 }
-/*
+
 // Recursive "floodfill" function to show the user all connecting cells bordered by zero
 // mines if they have selected a cell bordered by zero mines.
 void Minesweeper::zeroFill(int y, int x)
 {
-    if (!isValidCell(y, x))
+    if (!realBoard.isValidCell(y, x))
         return;
-    if (realBoard[y][x] != '0')
+    if (realBoard.getCellContents(y, x) != '0')
         return;
-    if (gameBoard[y][x] == '0')
+    if (gameBoard.getCellContents(y, x) == '0')
         return;
     
-    gameBoard[y][x] = '0';
+    gameBoard.setCellContents(y, x, '0');
     
     int north = y-1;
     int south = y+1;
@@ -109,7 +109,7 @@ void Minesweeper::zeroFill(int y, int x)
     zeroFill(y, east);
 }
 
-*/
+
 // This function updates the game appropriately based on the user's choice of cell.
 void Minesweeper::updateGame()
 {
@@ -120,13 +120,9 @@ void Minesweeper::updateGame()
             std::cout << "You died!" << std::endl;
         }
         else if (realBoard.getCellContents(row, col) == '0')
-        {   std::cout << "Good choice." << std::endl;
-            //zeroFill(row, col);
-        }
+            zeroFill(row, col);
         else
-        {
             gameBoard.setCellContents(row, col, realBoard.countMines(row, col));
-        }
     else
         std::cout << "You won!" << std::endl;
 }
@@ -168,8 +164,8 @@ void Minesweeper::testGame()
     updateGame();
     gameBoard.printBoard();
     move();
-    updateGame();
     gameBoard.printBoard();
+    updateGame();
     //countAndReveal(realBoard);
     //printBoard(realBoard);
 }
