@@ -24,14 +24,8 @@ private:
 public:
     Minesweeper();
     
-    bool isValidCell(int y, int x);
-    
-    bool isAlive();
-    
-    bool hasWon();
-    
     void makeBoard(char board[][COLS]);
-
+    
     void placeMines();
     
     char countMines(char board[][COLS], int y, int x);
@@ -39,6 +33,12 @@ public:
     void countAndReveal(char board[][COLS]);
     
     void printBoard(char board[][COLS]);
+    
+    bool isAlive();
+    
+    bool hasWon();
+    
+    bool isValidCell(int y, int x);
 
     void move();
     
