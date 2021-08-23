@@ -8,18 +8,18 @@
 #ifndef Minesweeper_h
 #define Minesweeper_h
 
-const int ROWS = 3;
-const int COLS = 3;
-const int MINES = 1;
+const int ROWS = 5;
+const int COLS = 5;
+const int MINES = 21;
 
 class Minesweeper
 {
 private:
     int row;
     int col;
-    bool cheat;
-    char realBoard[ROWS][COLS];
-    char gameBoard[ROWS][COLS];
+    bool cheat; // Setting which enables user to see the realBoard.
+    char realBoard[ROWS][COLS]; // Board that contains the locations of all mines. 
+    char gameBoard[ROWS][COLS]; // Board that the user sees.
     
 public:
     Minesweeper();

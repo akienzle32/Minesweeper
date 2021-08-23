@@ -29,6 +29,7 @@ void Minesweeper::makeBoard(char board[][COLS])
     }
 }
 
+// Function to drop the requisite number of mines randomly across the board.
 void Minesweeper::placeMines()
 {
     int minesPlaced = 0;
@@ -81,7 +82,8 @@ char Minesweeper::countMines(char board[][COLS], int y, int x)
 }
 
 // This function counts all the adjacent mines to every cell on the board
-// and displays this number in the cell.
+// and displays this number in the cell. Within normal gameplay, it is only called on
+// the realBoard.
 void Minesweeper::countAndReveal(char board[][COLS])
 {
     for (int i = 0; i < ROWS; i++)
@@ -129,10 +131,8 @@ bool Minesweeper::isAlive()
     return(result);
 }
 
-// This function determines if the player has won by subtracting the amount of mines on the
-// board from the amount of moves made thus far. If the player has made this requisite
-// number of valid moves without dying, then they win.
-
+// This function determines if the player determining if the number of revealed cells is
+// equal to the number of cells without mines. 
 bool Minesweeper::hasWon()
 {
     bool result = false;
@@ -157,7 +157,8 @@ bool Minesweeper::hasWon()
 }
 
 // Set row and column variables to values determined by the player (if the values
-// are valid based on the size of the rows and columns).
+// are valid based on the size of the rows and columns). Also, inform the user if
+// they have selected this cell before.
 void Minesweeper::move()
 {
     int y, x;
@@ -186,6 +187,8 @@ void Minesweeper::move()
     }
 }
 
+// Recursive "floodfill" function to show the user all connecting cells bordered by zero
+// mines if they have selected a cell bordered by zero mines.
 void Minesweeper::fill(int y, int x)
 {
     if (!isValidCell(y, x))
@@ -218,9 +221,7 @@ bool Minesweeper::isValidCell(int y, int x)
     return(result);
 }
 
-// This function counts the number of adjacent mines to the selected cell and
-// displays that number in the selected cell. It also prints messages if the player
-// has either won or lost.
+// This function updates the game appropriately based on the user's choice of cell.
 void Minesweeper::updateGame()
 {
     if (!hasWon())
@@ -242,9 +243,9 @@ void Minesweeper::updateGame()
 }
 
 // This function allows the user to cheat by displaying the realBoard (i.e., the
-// one with the mines in it) once at the beginning of the game. This setting can be
-// changed simply by switching the boolean cheat variable in the Minesweeper
-// constructor.
+// one with the mines in it) once at the beginning of the game. It is called within
+// the playGame() function, so that its setting can simply be changed by switching
+// the boolean cheat variable in the Minesweeper constructor.
 void Minesweeper::cheatGame()
 {
     if (cheat)
@@ -269,6 +270,7 @@ void Minesweeper::playGame()
     updateGame();
 }
 
+// Utility function employed purely for testing purposes. 
 void Minesweeper::testGame()
 {
     printBoard(gameBoard);
