@@ -12,116 +12,16 @@
 
 Minesweeper::Minesweeper() : row(0), col(0), cheat(true)
 {
-    makeBoard(realBoard);
-    makeBoard(gameBoard);
-    placeMines();
-    countAndReveal(realBoard);
+    realBoard.makeBoard();
+    gameBoard.makeBoard();
+    realBoard.placeMines(MINES);
+    realBoard.countAndReveal();
+    //makeBoard(realBoard);
+    //makeBoard(gameBoard);
+    //placeMines();
+    //countAndReveal(realBoard);
 }
-
-void Minesweeper::makeBoard(char board[][COLS])
-{
-    for (int i = 0; i < ROWS; i++)
-    {
-        for (int j = 0; j < COLS; j++)
-        {
-            board[i][j] = '-';
-        }
-    }
-}
-
-// Function to drop the requisite number of mines randomly across the board.
-void Minesweeper::placeMines()
-{
-    int minesPlaced = 0;
-    srand(time(0));
-    
-    // Randomly drop the amount of mines determined by the MINES global constant.
-    while (minesPlaced < MINES)
-    {
-        int randRow = rand() % ROWS;
-        int randCol = rand() % COLS;
-        
-        if (realBoard[randRow][randCol] != '*')
-        {
-            realBoard[randRow][randCol] = '*';
-            minesPlaced++;
-        }
-    }
-}
-
-// This function counts all the mines immediately adjacent to a given cell,
-// and returns this number as a character.
-char Minesweeper::countMines(char board[][COLS], int y, int x)
-{
-    char charMines = '-';
-    if (isValidCell(y, x))
-    {
-        int mineCounter = 0;
-        if (board[y][x] != '*')
-        {
-            int north = y-1;
-            int south = y+2;
-            int west = x-1;
-            int east = x+2;
-    
-            for (int i = north; i < south; i++)
-            {
-                for (int  j = west; j < east; j++)
-                {
-                    if (isValidCell(i, j))
-                    {
-                        if (board[i][j] == '*')
-                            mineCounter++;
-                    }
-                }
-                charMines = mineCounter + '0';
-            }
-        }
-    }
-    return(charMines);
-}
-
-// This function counts all the adjacent mines to every cell on the board
-// and displays this number in the cell. Within normal gameplay, it is only called on
-// the realBoard.
-void Minesweeper::countAndReveal(char board[][COLS])
-{
-    for (int i = 0; i < ROWS; i++)
-    {
-        for (int j = 0; j < COLS; j++)
-        {
-            if (board[i][j] != '*')
-            {
-                board[i][j] = countMines(board, i, j);
-            }
-        }
-    }
-}
-
-void Minesweeper::printBoard(char board[][COLS])
-{
-    std::cout << "  ";
-    
-    // Print column numbers first.
-    for (int i = 0; i < COLS; i++)
-    {
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-    
-    // Then print row numbers, along with a properly spaced version of the
-    // the board.
-    for (int i = 0; i < ROWS; i++)
-    {
-        std::cout << i << " ";
-        for (int j = 0; j < COLS; j++)
-        {
-            std::cout << board[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-}
-
+/*
 bool Minesweeper::isAlive()
 {
     bool result = true;
@@ -149,17 +49,6 @@ bool Minesweeper::hasWon()
     }
     
     if (dashCounter == magicNumber and realBoard[row][col] != '*')
-        result = true;
-    
-    return(result);
-}
-
-// Function to determine if a cell is on the board.
-bool Minesweeper::isValidCell(int y, int x)
-{
-    bool result = false;
-    
-    if ((y >= 0 and y < ROWS) and (x >= 0 and x < COLS))
         result = true;
     
     return(result);
@@ -220,6 +109,7 @@ void Minesweeper::zeroFill(int y, int x)
     zeroFill(y, east);
 }
 
+
 // This function updates the game appropriately based on the user's choice of cell.
 void Minesweeper::updateGame()
 {
@@ -266,12 +156,12 @@ void Minesweeper::playGame()
     printBoard(realBoard);
     updateGame();
 }
-
+*/
 // Utility function employed purely for testing purposes. 
 void Minesweeper::testGame()
 {
-    printBoard(gameBoard);
-    printBoard(realBoard);
+    gameBoard.printBoard();
+    realBoard.printBoard();
     //countAndReveal(realBoard);
     //printBoard(realBoard);
 }

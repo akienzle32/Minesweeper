@@ -7,9 +7,10 @@
 
 #ifndef Minesweeper_h
 #define Minesweeper_h
+#include "Board.h"
 
-const int ROWS = 5;
-const int COLS = 5;
+//const int ROWS = 5;
+//const int COLS = 5;
 const int MINES = 4;
 
 class Minesweeper
@@ -18,27 +19,29 @@ private:
     int row;
     int col;
     bool cheat; // Setting which enables user to see the realBoard.
-    char realBoard[ROWS][COLS]; // Board that contains the locations of all mines. 
-    char gameBoard[ROWS][COLS]; // Board that the user sees.
+    Board realBoard;
+    Board gameBoard;
+    //char realBoard[ROWS][COLS]; // Board that contains the locations of all mines.
+    //char gameBoard[ROWS][COLS]; // Board that the user sees.
     
 public:
     Minesweeper();
     
-    void makeBoard(char board[][COLS]);
+    //void makeBoard(Board b);
     
-    void placeMines();
+    //void placeMines();
     
-    char countMines(char board[][COLS], int y, int x);
+    //char countMines(Board b, int y, int x);
     
-    void countAndReveal(char board[][COLS]);
+    //void countAndReveal(Board b);
     
-    void printBoard(char board[][COLS]);
+    //void printBoard(Board b);
     
     bool isAlive();
     
     bool hasWon();
     
-    bool isValidCell(int y, int x);
+    //bool isValidCell(int y, int x);
 
     void move();
     

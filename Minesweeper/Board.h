@@ -39,6 +39,8 @@ public:
     
     char getCellContents(int y, int x) const;
     
+    void setCellContents(int y, int x, char c);
+    
     bool isValidCell(int y, int x);
 
 };
