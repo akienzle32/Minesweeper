@@ -132,7 +132,7 @@ bool Minesweeper::isAlive()
 }
 
 // This function determines if the player has won the game by determining if the number of
-// revealed cells is equal to the number of cells without mines. 
+// revealed cells is equal to the number of cells without mines.
 bool Minesweeper::hasWon()
 {
     bool result = false;
@@ -149,9 +149,7 @@ bool Minesweeper::hasWon()
     }
     
     if (dashCounter == magicNumber and realBoard[row][col] != '*')
-    {
         result = true;
-    }
     
     return(result);
 }
@@ -160,6 +158,7 @@ bool Minesweeper::hasWon()
 bool Minesweeper::isValidCell(int y, int x)
 {
     bool result = false;
+    
     if ((y >= 0 and y < ROWS) and (x >= 0 and x < COLS))
         result = true;
     
