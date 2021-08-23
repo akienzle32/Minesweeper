@@ -167,6 +167,9 @@ void Minesweeper::testGame()
     move();
     updateGame();
     gameBoard.printBoard();
+    move();
+    updateGame();
+    gameBoard.printBoard();
     //countAndReveal(realBoard);
     //printBoard(realBoard);
 }
