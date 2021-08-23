@@ -16,10 +16,6 @@ Minesweeper::Minesweeper() : row(0), col(0), cheat(true)
     gameBoard.makeBoard();
     realBoard.placeMines(MINES);
     realBoard.countAndReveal();
-    //makeBoard(realBoard);
-    //makeBoard(gameBoard);
-    //placeMines();
-    //countAndReveal(realBoard);
 }
 
 bool Minesweeper::isAlive()
@@ -126,7 +122,7 @@ void Minesweeper::updateGame()
     else
         std::cout << "You won!" << std::endl;
 }
-/*
+
 // This function allows the user to cheat by displaying the realBoard (i.e., the
 // one with the mines on it) once at the beginning of the game. It is called within
 // the playGame() function, so that its setting can simply be changed by switching
@@ -134,12 +130,12 @@ void Minesweeper::updateGame()
 void Minesweeper::cheatGame()
 {
     if (cheat)
-        printBoard(realBoard);
+        realBoard.printBoard();
 }
 
 void Minesweeper::playGame()
 {
-    printBoard(gameBoard);
+    gameBoard.printBoard();
     cheatGame();
     move();
     
@@ -147,14 +143,14 @@ void Minesweeper::playGame()
     while (isAlive() and !hasWon())
     {
         updateGame();
-        printBoard(gameBoard);
+        gameBoard.printBoard();
         std::cout << "You're still alive." << std::endl;
         move();
     }
-    printBoard(realBoard);
+    realBoard.printBoard();
     updateGame();
 }
-*/
+
 // Utility function employed purely for testing purposes. 
 void Minesweeper::testGame()
 {
@@ -166,8 +162,6 @@ void Minesweeper::testGame()
     move();
     gameBoard.printBoard();
     updateGame();
-    //countAndReveal(realBoard);
-    //printBoard(realBoard);
 }
 
 

@@ -33,10 +33,6 @@ public:
     
     void chooseCell(int y, int x);
     
-    int getRow() const;
-    
-    int getCol() const;
-    
     char getCellContents(int y, int x) const;
     
     void setCellContents(int y, int x, char c);

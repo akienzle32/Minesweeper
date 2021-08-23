@@ -113,22 +113,6 @@ void Board::printBoard()
     }
 }
 
-void Board::chooseCell(int y, int x)
-{
-    row = y;
-    col = x;
-}
-
-int Board::getRow() const
-{
-    return(row);
-}
-
-int Board::getCol() const
-{
-    return(col);
-}
-
 char Board::getCellContents(int y, int x) const
 {
     return(board[y][x]);
