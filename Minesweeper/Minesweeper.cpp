@@ -189,7 +189,7 @@ void Minesweeper::move()
 
 // Recursive "floodfill" function to show the user all connecting cells bordered by zero
 // mines if they have selected a cell bordered by zero mines.
-void Minesweeper::fill(int y, int x)
+void Minesweeper::zeroFill(int y, int x)
 {
     if (!isValidCell(y, x))
         return;
@@ -205,10 +205,10 @@ void Minesweeper::fill(int y, int x)
     int west = x-1;
     int east = x+1;
     
-    fill(north, x);
-    fill(south, x);
-    fill(y, west);
-    fill(y, east);
+    zeroFill(north, x);
+    zeroFill(south, x);
+    zeroFill(y, west);
+    zeroFill(y, east);
 }
 
 // Function to determine if a cell is on the board.
@@ -231,7 +231,7 @@ void Minesweeper::updateGame()
             std::cout << "You died!" << std::endl;
         }
         else if (realBoard[row][col] == '0')
-            fill(row, col);
+            zeroFill(row, col);
         else
         {
             gameBoard[row][col] = countMines(realBoard, row, col);

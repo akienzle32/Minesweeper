@@ -10,7 +10,7 @@
 
 const int ROWS = 5;
 const int COLS = 5;
-const int MINES = 21;
+const int MINES = 20;
 
 class Minesweeper
 {
@@ -42,7 +42,7 @@ public:
 
     void move();
     
-    void fill(int y, int x);
+    void zeroFill(int y, int x);
     
     void updateGame();
     
