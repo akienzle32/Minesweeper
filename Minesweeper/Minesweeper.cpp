@@ -52,7 +52,8 @@ bool Minesweeper::hasWon()
 
 // Set row and column variables to values determined by the player (if the values
 // are valid based on the size of the rows and columns). The function allows the user
-// to input these values as standard x,y coordinates (i.e., column first, then row). 
+// to input these values as standard x,y coordinates (i.e., column first, then row). It
+// also informs the player if they have already selected this cell before. 
 void Minesweeper::move()
 {
     int y, x;
