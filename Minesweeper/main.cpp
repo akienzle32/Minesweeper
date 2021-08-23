@@ -11,7 +11,7 @@
 int main() {
 
     Minesweeper game;
-    game.playGame();
+    game.testGame();
     
     return(0);
 }

@@ -15,6 +15,7 @@ Minesweeper::Minesweeper() : row(0), col(0), mineCounter(0), moveCounter(0), che
     makeBoard(realBoard);
     makeBoard(gameBoard);
     placeMines();
+    countAndReveal(realBoard);
 }
 
 void Minesweeper::makeBoard(char board[][COLS])
@@ -198,8 +199,8 @@ void Minesweeper::fill(int y, int x)
     
     fill(north, x);
     fill(south, x);
-    fill(east, y);
-    fill(west, y);
+    fill(y, west);
+    fill(y, east);
 }
 
 // Function to determine if a cell is on the board.
@@ -224,7 +225,8 @@ void Minesweeper::updateGame()
             gameBoard[row][col] = '*';
             std::cout << "You died!" << std::endl;
         }
-        
+        else if (realBoard[row][col] == '0')
+            fill(row, col);
         else
         {
             gameBoard[row][col] = countMines(realBoard, row, col);
@@ -267,8 +269,8 @@ void Minesweeper::testGame()
 {
     printBoard(gameBoard);
     printBoard(realBoard);
-    countAndReveal(realBoard);
-    printBoard(realBoard);
+    //countAndReveal(realBoard);
+    //printBoard(realBoard);
     move();
     updateGame();
     printBoard(gameBoard);
