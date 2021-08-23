@@ -165,10 +165,10 @@ bool Minesweeper::hasWon()
         }
     }
     
-    if (dashCounter == magicNumber)
+    if (dashCounter == magicNumber and realBoard[row][col] != '*')
     {
         result = true;
-        std::cout << "You won!" << std::endl;
+        //std::cout << "You won!" << std::endl;
     }
     
     return(result);
@@ -246,6 +246,7 @@ bool Minesweeper::isValidCell(int y, int x)
 // has either won or lost.
 void Minesweeper::updateGame()
 {
+    if (!hasWon())
         if (realBoard[row][col] == '*')
         {
             gameBoard[row][col] = '*';
@@ -258,6 +259,8 @@ void Minesweeper::updateGame()
         {
             gameBoard[row][col] = countMines(realBoard, row, col);
         }
+    else
+        std::cout << "You won!" << std::endl;
 
 }
 
