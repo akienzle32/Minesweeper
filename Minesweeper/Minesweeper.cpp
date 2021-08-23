@@ -28,7 +28,7 @@ bool Minesweeper::isAlive()
 }
 
 // This function determines if the player has won the game by determining if the number of
-// revealed cells is equal to the number of cells without mines.
+// unrevealed cells is equal to the number of mines.
 bool Minesweeper::hasWon()
 {
     bool result = false;
