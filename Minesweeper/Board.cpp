@@ -134,6 +134,11 @@ char Board::getCellContents(int y, int x) const
     return(board[y][x]);
 }
 
+void Board::setCellContents(int y, int x, char c)
+{
+    board[y][x] = c;
+}
+
 
 bool Board::isValidCell(int y, int x)
 {

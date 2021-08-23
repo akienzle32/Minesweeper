@@ -114,16 +114,18 @@ void Minesweeper::zeroFill(int y, int x)
 void Minesweeper::updateGame()
 {
     if (!hasWon())
-        if (realBoard[row][col] == '*')
+        if (realBoard.getCellContents(row, col) == '*')
         {
-            gameBoard[row][col] = '*';
+            gameBoard.setCellContents(row, col, '*');
             std::cout << "You died!" << std::endl;
         }
-        else if (realBoard[row][col] == '0')
-            zeroFill(row, col);
+        else if (realBoard.getCellContents(row, col) == '0')
+        {   std::cout << "Good choice." << std::endl;
+            //zeroFill(row, col);
+        }
         else
         {
-            gameBoard[row][col] = countMines(realBoard, row, col);
+            gameBoard.setCellContents(row, col, realBoard.countMines(row, col));
         }
     else
         std::cout << "You won!" << std::endl;
@@ -163,6 +165,8 @@ void Minesweeper::testGame()
     gameBoard.printBoard();
     realBoard.printBoard();
     move();
+    updateGame();
+    gameBoard.printBoard();
     //countAndReveal(realBoard);
     //printBoard(realBoard);
 }
