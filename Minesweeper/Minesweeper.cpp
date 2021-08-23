@@ -159,7 +159,7 @@ bool Minesweeper::hasWon()
     {
         for (int j = 0; j < COLS; j++)
         {
-            if (revealedCells == magicNumber)
+            if (revealedCells == magicNumber and realBoard[row][col] != '*')
                 result = true;
         }
     }
