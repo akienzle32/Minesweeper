@@ -12,7 +12,7 @@ int main() {
 
     Minesweeper game;
     game.cheatGame();
-    game.recursivePlay();
+    game.playGame();
     
     return(0);
 }
