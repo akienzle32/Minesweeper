@@ -49,8 +49,6 @@ public:
     
     void playGame();
     
-    void recursivePlay();
-    
     void testGame();
 };
 

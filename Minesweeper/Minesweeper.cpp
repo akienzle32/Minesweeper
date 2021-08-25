@@ -247,7 +247,7 @@ void Minesweeper::cheatGame()
     printBoard(realBoard);
 }
 
-void Minesweeper::recursivePlay()
+void Minesweeper::playGame()
 {
     if (!isAlive())
         return;
@@ -257,25 +257,7 @@ void Minesweeper::recursivePlay()
     printBoard(gameBoard);
     move();
     updateGame();
-    recursivePlay();
-}
-
-void Minesweeper::playGame()
-{
-    printBoard(gameBoard);
-    cheatGame();
-    move();
-    
-    // Continue playing as long as the player is alive and has not won yet.
-    while (isAlive() and !hasWon())
-    {
-        updateGame();
-        printBoard(gameBoard);
-        std::cout << "You're still alive." << std::endl;
-        move();
-    }
-    printBoard(realBoard);
-    updateGame();
+    playGame();
 }
 
 // Utility function employed purely for testing purposes. 
