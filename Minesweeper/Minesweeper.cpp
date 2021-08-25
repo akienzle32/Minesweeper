@@ -199,7 +199,7 @@ void Minesweeper::move()
         {
             if (gameBoard[row][col] == digitArray[i])
             {
-                std::cout << "You already chose this cell." << std::endl;
+                std::cout << "You already revealed this cell." << std::endl;
             }
         }
     }
