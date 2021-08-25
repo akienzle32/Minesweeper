@@ -11,7 +11,8 @@
 int main() {
 
     Minesweeper game;
-    game.playGame();
+    game.placeMines();
+    game.cheatGame();
     
     return(0);
 }

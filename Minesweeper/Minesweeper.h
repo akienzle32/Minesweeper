@@ -23,6 +23,12 @@ private:
 public:
     Minesweeper();
     
+    void placeMines();
+    
+    char countMines(int y, int x);
+    
+    void countAndReveal();
+    
     bool isAlive();
     
     bool hasWon();

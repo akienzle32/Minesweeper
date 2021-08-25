@@ -14,8 +14,27 @@ Minesweeper::Minesweeper() : row(0), col(0), cheat(true)
 {
     realBoard.makeBoard();
     gameBoard.makeBoard();
-    realBoard.placeMines(MINES);
-    realBoard.countAndReveal();
+    //realBoard.placeMines(MINES);
+    //realBoard.countAndReveal();
+}
+
+void Minesweeper::placeMines()
+{
+    int minesPlaced = 0;
+    srand(time(0));
+    
+    // Randomly drop the amount of mines determined by the MINES global constant.
+    while (minesPlaced < MINES)
+    {
+        int randRow = rand() % 5;
+        int randCol = rand() % 5;
+        
+        if (realBoard.getCellContents(randRow, randCol) != '*')
+        {
+            realBoard.setCellContents(randRow, randCol, '*');
+            minesPlaced++;
+        }
+    }
 }
 
 bool Minesweeper::isAlive()
