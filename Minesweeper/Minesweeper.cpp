@@ -235,15 +235,13 @@ void Minesweeper::updateGame()
     if (!hasWon())
     {
         if (realBoard[row][col] == '*')
-        {
             gameBoard[row][col] = '*';
-        }
+        
         else if (realBoard[row][col] == '0')
             zeroFill(row, col);
+        
         else
-        {
             gameBoard[row][col] = countMines(realBoard, row, col);
-        }
     }
 }
 
