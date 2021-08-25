@@ -232,17 +232,14 @@ void Minesweeper::zeroFill(int y, int x)
 // This function updates the game appropriately based on the user's choice of cell.
 void Minesweeper::updateGame()
 {
-    if (!hasWon())
-    {
-        if (realBoard[row][col] == '*')
-            gameBoard[row][col] = '*';
+    if (realBoard[row][col] == '*')
+        gameBoard[row][col] = '*';
         
-        else if (realBoard[row][col] == '0')
-            zeroFill(row, col);
+    else if (realBoard[row][col] == '0')
+        zeroFill(row, col);
         
-        else
-            gameBoard[row][col] = countMines(realBoard, row, col);
-    }
+    else
+        gameBoard[row][col] = countMines(realBoard, row, col);
 }
 
 void Minesweeper::cheatGame()
