@@ -9,7 +9,7 @@
 #define Minesweeper_h
 #include "Board.h"
 
-const int MINES = 21;
+const int MINES = 6;
 
 class Minesweeper
 {
@@ -23,11 +23,11 @@ private:
 public:
     Minesweeper();
     
-    void placeMines();
+    void placeMines(Board& b);
     
-    char countMines(int y, int x);
+    char countMines(Board& b, int y, int x);
     
-    void countAndReveal();
+    void countAndReveal(Board& b);
     
     bool isAlive();
     

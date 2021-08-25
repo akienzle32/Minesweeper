@@ -12,13 +12,13 @@
 
 Minesweeper::Minesweeper() : row(0), col(0), cheat(true)
 {
-    realBoard.makeBoard();
     gameBoard.makeBoard();
-    //realBoard.placeMines(MINES);
-    //realBoard.countAndReveal();
+    realBoard.makeBoard();
+    placeMines(realBoard);
+    countAndReveal(realBoard);
 }
 
-void Minesweeper::placeMines()
+void Minesweeper::placeMines(Board& b)
 {
     int minesPlaced = 0;
     srand(time(0));
@@ -26,13 +26,55 @@ void Minesweeper::placeMines()
     // Randomly drop the amount of mines determined by the MINES global constant.
     while (minesPlaced < MINES)
     {
-        int randRow = rand() % 5;
-        int randCol = rand() % 5;
+        int randRow = rand() % ROWS;
+        int randCol = rand() % COLS;
         
-        if (realBoard.getCellContents(randRow, randCol) != '*')
+        if (b.getCellContents(randRow, randCol) != '*')
         {
-            realBoard.setCellContents(randRow, randCol, '*');
+            b.setCellContents(randRow, randCol, '*');
             minesPlaced++;
+        }
+    }
+}
+
+char Minesweeper::countMines(Board& b, int y, int x)
+{
+    char charMines = '-';
+    if (b.isValidCell(y, x))
+    {
+        int mineCounter = 0;
+        if (b.getCellContents(y, x) != '*')
+        {
+            int north = y-1;
+            int south = y+2;
+            int west = x-1;
+            int east = x+2;
+    
+            for (int i = north; i < south; i++)
+            {
+                for (int  j = west; j < east; j++)
+                {
+                    if (b.isValidCell(i, j))
+                    {
+                        if (b.getCellContents(i, j) == '*')
+                            mineCounter++;
+                    }
+                }
+                charMines = mineCounter + '0';
+            }
+        }
+    }
+    return(charMines);
+}
+
+void Minesweeper::countAndReveal(Board& b)
+{
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            if (b.getCellContents(i, j) != '*')
+                b.setCellContents(i, j, countMines(b, i, j));
         }
     }
 }

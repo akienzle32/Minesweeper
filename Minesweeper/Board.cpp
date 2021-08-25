@@ -25,7 +25,7 @@ void Board::makeBoard()
         }
     }
 }
-
+/*
 void Board::placeMines(int mines)
 {
     int minesPlaced = 0;
@@ -44,6 +44,7 @@ void Board::placeMines(int mines)
         }
     }
 }
+*/
 
 char Board::countMines(int y, int x)
 {

@@ -7,12 +7,13 @@
 
 #include <iostream>
 #include "Minesweeper.h"
+#include "Board.h"
 
 int main() {
 
     Minesweeper game;
-    game.placeMines();
     game.cheatGame();
+    
     
     return(0);
 }
