@@ -14,11 +14,11 @@ Minesweeper::Minesweeper() : row(0), col(0), cheat(true)
 {
     gameBoard.makeBoard();
     realBoard.makeBoard();
-    placeMines(realBoard);
-    countAndReveal(realBoard);
+    placeMines();
+    countAndReveal();
 }
 
-void Minesweeper::placeMines(Board& b)
+void Minesweeper::placeMines()
 {
     int minesPlaced = 0;
     srand(time(0));
@@ -29,9 +29,9 @@ void Minesweeper::placeMines(Board& b)
         int randRow = rand() % ROWS;
         int randCol = rand() % COLS;
         
-        if (b.getCellContents(randRow, randCol) != '*')
+        if (realBoard.getCellContents(randRow, randCol) != '*')
         {
-            b.setCellContents(randRow, randCol, '*');
+            realBoard.setCellContents(randRow, randCol, '*');
             minesPlaced++;
         }
     }
@@ -67,14 +67,14 @@ char Minesweeper::countMines(Board& b, int y, int x)
     return(charMines);
 }
 
-void Minesweeper::countAndReveal(Board& b)
+void Minesweeper::countAndReveal()
 {
     for (int i = 0; i < ROWS; i++)
     {
         for (int j = 0; j < COLS; j++)
         {
-            if (b.getCellContents(i, j) != '*')
-                b.setCellContents(i, j, countMines(b, i, j));
+            if (realBoard.getCellContents(i, j) != '*')
+                realBoard.setCellContents(i, j, countMines(realBoard, i, j));
         }
     }
 }
