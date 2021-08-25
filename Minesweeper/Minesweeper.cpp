@@ -125,8 +125,13 @@ void Minesweeper::printBoard(char board[][COLS])
 bool Minesweeper::isAlive()
 {
     bool result = true;
-    if (realBoard[row][col] == '*')
+    
+    if (gameBoard[row][col] == '*')
+    {
         result = false;
+        printBoard(realBoard);
+        std::cout << "You died!" << std::endl;
+    }
     
     return(result);
 }
@@ -137,7 +142,7 @@ bool Minesweeper::hasWon()
 {
     bool result = false;
     int dashCounter = 0;
-    int magicNumber = MINES+1;
+    int magicNumber = MINES;
     
     for (int i = 0; i < ROWS; i++)
     {
@@ -149,7 +154,11 @@ bool Minesweeper::hasWon()
     }
     
     if (dashCounter == magicNumber and realBoard[row][col] != '*')
+    {
         result = true;
+        printBoard(realBoard);
+        std::cout << "You won!" << std::endl;
+    }
     
     return(result);
 }
@@ -227,7 +236,7 @@ void Minesweeper::updateGame()
         if (realBoard[row][col] == '*')
         {
             gameBoard[row][col] = '*';
-            std::cout << "You died!" << std::endl;
+            //std::cout << "You died!" << std::endl;
         }
         else if (realBoard[row][col] == '0')
             zeroFill(row, col);
@@ -247,6 +256,20 @@ void Minesweeper::cheatGame()
 {
     if (cheat)
         printBoard(realBoard);
+}
+
+void Minesweeper::recursivePlay()
+{
+    if (!isAlive())
+        return;
+    if (hasWon())
+        return;
+    
+    printBoard(gameBoard);
+    //cheatGame();
+    move();
+    updateGame();
+    recursivePlay();
 }
 
 void Minesweeper::playGame()

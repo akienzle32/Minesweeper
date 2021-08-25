@@ -11,7 +11,8 @@
 int main() {
 
     Minesweeper game;
-    game.playGame();
+    game.cheatGame();
+    game.recursivePlay();
     
     return(0);
 }
