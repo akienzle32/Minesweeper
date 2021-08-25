@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include "Minesweeper.h"
 
-Minesweeper::Minesweeper() : row(0), col(0), cheat(true)
+Minesweeper::Minesweeper() : row(0), col(0)
 {
     makeBoard(realBoard);
     makeBoard(gameBoard);
@@ -233,10 +233,10 @@ void Minesweeper::zeroFill(int y, int x)
 void Minesweeper::updateGame()
 {
     if (!hasWon())
+    {
         if (realBoard[row][col] == '*')
         {
             gameBoard[row][col] = '*';
-            //std::cout << "You died!" << std::endl;
         }
         else if (realBoard[row][col] == '0')
             zeroFill(row, col);
@@ -244,18 +244,12 @@ void Minesweeper::updateGame()
         {
             gameBoard[row][col] = countMines(realBoard, row, col);
         }
-    else
-        std::cout << "You won!" << std::endl;
+    }
 }
 
-// This function allows the user to cheat by displaying the realBoard (i.e., the
-// one with the mines on it) once at the beginning of the game. It is called within
-// the playGame() function, so that its setting can simply be changed by switching
-// the boolean cheat variable in the Minesweeper constructor.
 void Minesweeper::cheatGame()
 {
-    if (cheat)
-        printBoard(realBoard);
+    printBoard(realBoard);
 }
 
 void Minesweeper::recursivePlay()
@@ -266,7 +260,6 @@ void Minesweeper::recursivePlay()
         return;
     
     printBoard(gameBoard);
-    //cheatGame();
     move();
     updateGame();
     recursivePlay();

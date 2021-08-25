@@ -10,14 +10,13 @@
 
 const int ROWS = 5;
 const int COLS = 5;
-const int MINES = 5;
+const int MINES = 21;
 
 class Minesweeper
 {
 private:
     int row;
     int col;
-    bool cheat; // Setting which enables user to see the realBoard.
     char realBoard[ROWS][COLS]; // Board that contains the locations of all mines. 
     char gameBoard[ROWS][COLS]; // Board that the user sees.
     
