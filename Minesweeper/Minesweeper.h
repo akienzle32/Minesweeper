@@ -9,7 +9,7 @@
 #define Minesweeper_h
 #include "Board.h"
 
-const int MINES = 20;
+//const int MINES = 20;
 
 class Minesweeper
 {
@@ -23,11 +23,11 @@ private:
 public:
     Minesweeper();
     
-    enum Difficulty {EASY, MEDIUM, HARD};
-    
     void setRowColAndMines(int y, int x, int mines);
     
     void setDifficultyLevel(char level);
+    
+    void promptForDifficulty();
     
     void makeBoards();
     

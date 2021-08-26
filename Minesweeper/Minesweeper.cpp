@@ -12,9 +12,9 @@
 
 Minesweeper::Minesweeper() : row(0), col(0)
 {
-    //makeBoards();
-    //placeMines();
-    //countAndReveal();
+    promptForDifficulty();
+    makeBoards();
+    playGame();
 }
 
 void Minesweeper::setRowColAndMines(int y, int x, int mines)
@@ -34,14 +34,25 @@ void Minesweeper::setDifficultyLevel(char level)
             break;
         case 'M':
             setRowColAndMines(10, 10, 10);
-            mines = 10;
             break;
         case 'H':
             setRowColAndMines(15, 15, 25);
             break;
+        default:
+            std::cout << "That's not a valid difficulty level." << std::endl;
+            promptForDifficulty();
     }
 }
 
+void Minesweeper::promptForDifficulty()
+{
+    char c;
+    std::cout << "Please choose a level of difficulty. Enter 'E' for easy (5x5 board), 'M' for medium (10x10 board), or 'H' for hard (15x15 board)." << std::endl;
+    
+    std::cin >> c;
+    setDifficultyLevel(c);
+}
+ 
 void Minesweeper::makeBoards()
 {
     gameBoard.makeBoard();
@@ -58,7 +69,7 @@ void Minesweeper::placeMines()
     srand(time(0));
     
     // Randomly drop the amount of mines determined by the MINES global constant.
-    while (minesPlaced < MINES)
+    while (minesPlaced < mines)
     {
         int randRow = rand() % realBoard.getRowSize();
         int randCol = rand() % realBoard.getColSize();
@@ -145,7 +156,7 @@ bool Minesweeper::hasWon()
         }
     }
     
-    if (dashCounter == MINES)
+    if (dashCounter == mines)
     {
         result = true;
         realBoard.printBoard();
