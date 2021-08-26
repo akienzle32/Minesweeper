@@ -18,8 +18,8 @@ int main() {
     */
     
     Minesweeper game;
-    game.cheatGame();
-    game.playGame();
+    game.setDifficultyLevel('E');
+    game.makeBoards();
 
     return(0);
 }

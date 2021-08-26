@@ -12,24 +12,44 @@
 
 Minesweeper::Minesweeper() : row(0), col(0)
 {
-    makeBoards();
-    placeMines();
-    countAndReveal();
+    //makeBoards();
+    //placeMines();
+    //countAndReveal();
 }
 
-void Minesweeper::setRowAndColSizes(int y, int x)
+void Minesweeper::setRowColAndMines(int y, int x, int mines)
 {
-    row_size = y;
-    col_size = x;
+    realBoard.setRowAndColSize(y, x);
+    gameBoard.setRowAndColSize(y, x);
+    this->mines = mines;
+
+}
+
+void Minesweeper::setDifficultyLevel(char level)
+{
+    switch(level)
+    {
+        case 'E':
+            setRowColAndMines(5, 5, 4);
+            break;
+        case 'M':
+            setRowColAndMines(10, 10, 10);
+            mines = 10;
+            break;
+        case 'H':
+            setRowColAndMines(15, 15, 25);
+            break;
+    }
 }
 
 void Minesweeper::makeBoards()
 {
-    setRowAndColSizes(5, 5);
-    gameBoard.setRowAndColSize(row_size, col_size);
-    realBoard.setRowAndColSize(row_size, col_size);
     gameBoard.makeBoard();
     realBoard.makeBoard();
+    placeMines();
+    countAndReveal();
+    gameBoard.printBoard();
+    realBoard.printBoard();
 }
 
 void Minesweeper::placeMines()

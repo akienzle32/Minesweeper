@@ -14,17 +14,20 @@ const int MINES = 20;
 class Minesweeper
 {
 private:
-    int row_size;
-    int col_size;
     int row;
     int col;
+    int mines;
     Board realBoard; // Board that contains the locations of all mines.
     Board gameBoard; // Board that the user sees.
     
 public:
     Minesweeper();
     
-    void setRowAndColSizes(int y, int x);
+    enum Difficulty {EASY, MEDIUM, HARD};
+    
+    void setRowColAndMines(int y, int x, int mines);
+    
+    void setDifficultyLevel(char level);
     
     void makeBoards();
     
