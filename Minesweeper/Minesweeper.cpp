@@ -82,11 +82,26 @@ void Minesweeper::countAndReveal()
 bool Minesweeper::isAlive()
 {
     bool result = true;
+    
+    if (gameBoard.getCellContents(row, col) == '*')
+    {
+        result = false;
+        realBoard.printBoard();
+        std::cout << "You died!" << std::endl;
+    }
+    
+    return(result);
+}
+/*
+bool Minesweeper::isAlive()
+{
+    bool result = true;
     if (realBoard.getCellContents(row, col) == '*')
         result = false;
     
     return(result);
 }
+*/
 
 // This function determines if the player has won the game by finding out if the number of
 // unrevealed cells is equal to the number of mines.
