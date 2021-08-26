@@ -197,6 +197,20 @@ void Minesweeper::cheatGame()
 
 void Minesweeper::playGame()
 {
+    if (!isAlive())
+        return;
+    if (hasWon())
+        return;
+    
+    gameBoard.printBoard();
+    move();
+    updateGame();
+    playGame();
+}
+
+/*
+void Minesweeper::playGame()
+{
     gameBoard.printBoard();
     cheatGame();
     move();
@@ -212,6 +226,7 @@ void Minesweeper::playGame()
     realBoard.printBoard();
     updateGame();
 }
+*/
 
 // Utility function employed purely for testing purposes. 
 void Minesweeper::testGame()
