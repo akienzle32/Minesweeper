@@ -14,24 +14,14 @@ const int COLS = 5;
 class Board
 {
 private:
-    int row;
-    int col;
     char board[ROWS][COLS];
     
 public:
     Board();
     
     void makeBoard();
-
-    void placeMines(int mines);
-    
-    char countMines(int y, int x);
     
     void printBoard();
-    
-    void countAndReveal();
-    
-    void chooseCell(int y, int x);
     
     char getCellContents(int y, int x) const;
     
