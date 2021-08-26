@@ -120,7 +120,7 @@ bool Minesweeper::hasWon()
         }
     }
     
-    if (dashCounter == magicNumber and realBoard.getCellContents(row, col) != '*')
+    if (dashCounter == magicNumber)
     {
         result = true;
         realBoard.printBoard();
@@ -130,35 +130,10 @@ bool Minesweeper::hasWon()
     return(result);
 }
 
-/*
-// This function determines if the player has won the game by finding out if the number of
-// unrevealed cells is equal to the number of mines.
-bool Minesweeper::hasWon()
-{
-    bool result = false;
-    int dashCounter = 0;
-    int magicNumber = MINES;
-    
-    for (int i = 0; i < ROWS; i++)
-    {
-        for (int j = 0; j < COLS; j++)
-        {
-            if (gameBoard.getCellContents(i, j) == '-')
-                dashCounter++;
-        }
-    }
-    
-    if (dashCounter == magicNumber and realBoard.getCellContents(row, col) != '*')
-        result = true;
-    
-    return(result);
-}
-*/
-
-// Set row and column variables to values determined by the player (if the values
-// are valid based on the size of the rows and columns). The function allows the user
-// to input these values as standard x,y coordinates (i.e., column first, then row). It
-// also informs the player if they have already selected this cell before. 
+// Set row and column variables to values determined by the player (if the values are
+// valid based on the size of ROWS and COLS in the Board class). The function accepts
+// these values as standard x,y coordinates (i.e., column first, then row). It also
+// informs the player if they have already selected this cell before.
 void Minesweeper::move()
 {
     int y, x;
