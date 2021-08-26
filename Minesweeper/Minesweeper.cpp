@@ -14,7 +14,6 @@ Minesweeper::Minesweeper() : row(0), col(0)
 {
     promptForDifficulty();
     makeBoards();
-    playGame();
 }
 
 void Minesweeper::setRowColAndMines(int y, int x, int mines)

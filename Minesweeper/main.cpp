@@ -12,6 +12,7 @@
 int main() {
     
     Minesweeper game;
+    game.playGame();
 
     return(0);
 }
