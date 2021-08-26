@@ -92,16 +92,6 @@ bool Minesweeper::isAlive()
     
     return(result);
 }
-/*
-bool Minesweeper::isAlive()
-{
-    bool result = true;
-    if (realBoard.getCellContents(row, col) == '*')
-        result = false;
-    
-    return(result);
-}
-*/
 
 // This function determines if the player has won the game by determining if the number of
 // revealed cells is equal to the number of cells without mines.
@@ -199,25 +189,6 @@ void Minesweeper::updateGame()
         gameBoard.setCellContents(row, col, countMines(realBoard, row, col));
 }
 
-/*
-// This function updates the game appropriately based on the user's choice of cell.
-void Minesweeper::updateGame()
-{
-    if (!hasWon())
-        if (realBoard.getCellContents(row, col) == '*')
-        {
-            gameBoard.setCellContents(row, col, '*');
-            std::cout << "You died!" << std::endl;
-        }
-        else if (realBoard.getCellContents(row, col) == '0')
-            zeroFill(row, col);
-        else
-            gameBoard.setCellContents(row, col, realBoard.countMines(row, col));
-    else
-        std::cout << "You won!" << std::endl;
-}
-*/
-
 // This function allows the user to cheat by displaying the realBoard (i.e., the
 // one with the mines on it) once at the beginning of the game. It is called within
 // the playGame() function, so that its setting can simply be changed by switching
@@ -240,26 +211,6 @@ void Minesweeper::playGame()
     updateGame();
     playGame();
 }
-
-/*
-void Minesweeper::playGame()
-{
-    gameBoard.printBoard();
-    cheatGame();
-    move();
-    
-    // Continue playing as long as the player is alive and has not won yet.
-    while (isAlive() and !hasWon())
-    {
-        updateGame();
-        gameBoard.printBoard();
-        std::cout << "You're still alive." << std::endl;
-        move();
-    }
-    realBoard.printBoard();
-    updateGame();
-}
-*/
 
 // Utility function employed purely for testing purposes. 
 void Minesweeper::testGame()
