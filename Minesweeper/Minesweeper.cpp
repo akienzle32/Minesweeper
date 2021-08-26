@@ -95,7 +95,7 @@ bool Minesweeper::isAlive()
     return(result);
 }
 
-// This function determines if the player has won the game by calculating if the number of
+// Determines if the player has won the game by calculating if the number of
 // unrevealed cells is equal to the number of mines.
 bool Minesweeper::hasWon()
 {
@@ -121,7 +121,7 @@ bool Minesweeper::hasWon()
     return(result);
 }
 
-// Set row and column variables to values determined by the player (if the values are
+// Sets row and column variables to values determined by the player (if the values are
 // valid based on the size of ROWS and COLS in the Board class). The function accepts
 // these values as standard x,y coordinates (i.e., column first, then row). It also
 // informs the player if they have already selected this cell before.
@@ -190,8 +190,7 @@ void Minesweeper::updateGame()
         gameBoard.setCellContents(row, col, countMines(realBoard, row, col));
 }
 
-// This function allows the user to cheat by displaying the realBoard (i.e., the
-// one with the mines on it).
+// Allows the user to cheat by displaying the realBoard (i.e., the one with the mines). 
 void Minesweeper::cheatGame()
 {
     realBoard.printBoard();
