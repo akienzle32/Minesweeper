@@ -31,25 +31,36 @@ void Minesweeper::promptForDifficulty()
     std::cout << "Enter 'E' for easy (5x5 board), 'M' for medium (10x10 board),\nor 'H' for hard (15x15 board):\n\n";
     
     std::cin >> c;
-    setDifficultyLevel(c);
+    switch(c)
+    {
+        case 'E':
+            setDifficultyLevel(EASY);
+            break;
+        case 'M':
+            setDifficultyLevel(MEDIUM);
+            break;
+        case 'H':
+            setDifficultyLevel(HARD);
+            break;
+        default:
+            std::cout << "That's not a valid level of difficulty.\n\n";
+            promptForDifficulty();
+    }
 }
 
-void Minesweeper::setDifficultyLevel(char level)
+void Minesweeper::setDifficultyLevel(Minesweeper::Difficulty level)
 {
     switch(level)
     {
-        case 'E':
+        case EASY:
             setRowColAndMines(5, 5, 4);
             break;
-        case 'M':
+        case MEDIUM:
             setRowColAndMines(10, 10, 10);
             break;
-        case 'H':
+        case HARD:
             setRowColAndMines(15, 15, 25);
             break;
-        default:
-            std::cout << "That's not a valid difficulty level." << std::endl;
-            promptForDifficulty();
     }
 }
 

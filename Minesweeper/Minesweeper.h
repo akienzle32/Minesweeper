@@ -15,6 +15,7 @@ private:
     int row;
     int col;
     int mines;
+    enum Difficulty {EASY, MEDIUM, HARD};
     Board realBoard; // Board that contains the locations of all mines.
     Board gameBoard; // Board that the user sees.
     
@@ -23,7 +24,7 @@ public:
     
     void setRowColAndMines(int y, int x, int mines);
     
-    void setDifficultyLevel(char level);
+    void setDifficultyLevel(Minesweeper::Difficulty level);
     
     void promptForDifficulty();
     
