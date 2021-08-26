@@ -37,6 +37,7 @@ void Minesweeper::placeMines()
     }
 }
 
+// Counts all mines immediately adjacent to a given cell.
 char Minesweeper::countMines(Board& b, int y, int x)
 {
     char charMines = '-';
