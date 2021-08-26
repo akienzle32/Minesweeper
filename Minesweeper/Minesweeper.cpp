@@ -67,6 +67,7 @@ char Minesweeper::countMines(Board& b, int y, int x)
     return(charMines);
 }
 
+// This function applies countMines() to every cell in realBoard.
 void Minesweeper::countAndReveal()
 {
     for (int i = 0; i < ROWS; i++)
@@ -93,13 +94,12 @@ bool Minesweeper::isAlive()
     return(result);
 }
 
-// This function determines if the player has won the game by determining if the number of
-// revealed cells is equal to the number of cells without mines.
+// This function determines if the player has won the game by calculating if the number of
+// unrevealed cells is equal to the number of mines.
 bool Minesweeper::hasWon()
 {
     bool result = false;
     int dashCounter = 0;
-    int magicNumber = MINES;
     
     for (int i = 0; i < ROWS; i++)
     {
@@ -110,7 +110,7 @@ bool Minesweeper::hasWon()
         }
     }
     
-    if (dashCounter == magicNumber)
+    if (dashCounter == MINES)
     {
         result = true;
         realBoard.printBoard();
@@ -176,7 +176,7 @@ void Minesweeper::zeroFill(int y, int x)
     zeroFill(y, east);
 }
 
-// This function updates the game appropriately based on the user's choice of cell.
+// This function updates the gameBoard appropriately based on the user's choice of cell.
 void Minesweeper::updateGame()
 {
     if (realBoard.getCellContents(row, col) == '*')
@@ -190,13 +190,10 @@ void Minesweeper::updateGame()
 }
 
 // This function allows the user to cheat by displaying the realBoard (i.e., the
-// one with the mines on it) once at the beginning of the game. It is called within
-// the playGame() function, so that its setting can simply be changed by switching
-// the boolean cheat variable in the Minesweeper constructor.
+// one with the mines on it).
 void Minesweeper::cheatGame()
 {
-    if (cheat)
-        realBoard.printBoard();
+    realBoard.printBoard();
 }
 
 void Minesweeper::playGame()
