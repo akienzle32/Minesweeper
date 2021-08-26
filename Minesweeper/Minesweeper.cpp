@@ -94,7 +94,7 @@ bool Minesweeper::hasWon()
 {
     bool result = false;
     int dashCounter = 0;
-    int magicNumber = MINES+1;
+    int magicNumber = MINES;
     
     for (int i = 0; i < ROWS; i++)
     {
@@ -167,7 +167,20 @@ void Minesweeper::zeroFill(int y, int x)
     zeroFill(y, east);
 }
 
+// This function updates the game appropriately based on the user's choice of cell.
+void Minesweeper::updateGame()
+{
+    if (realBoard.getCellContents(row, col) == '*')
+        gameBoard.setCellContents(row, col, '*');
+        
+    else if (realBoard.getCellContents(row, col) == '0')
+        zeroFill(row, col);
+        
+    else
+        gameBoard.setCellContents(row, col, countMines(realBoard, row, col));
+}
 
+/*
 // This function updates the game appropriately based on the user's choice of cell.
 void Minesweeper::updateGame()
 {
@@ -184,6 +197,7 @@ void Minesweeper::updateGame()
     else
         std::cout << "You won!" << std::endl;
 }
+*/
 
 // This function allows the user to cheat by displaying the realBoard (i.e., the
 // one with the mines on it) once at the beginning of the game. It is called within
