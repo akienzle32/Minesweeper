@@ -17,10 +17,17 @@ Minesweeper::Minesweeper() : row(0), col(0)
     countAndReveal();
 }
 
+void Minesweeper::setRowAndColSizes(int y, int x)
+{
+    row_size = y;
+    col_size = x;
+}
+
 void Minesweeper::makeBoards()
 {
-    gameBoard.setRowAndColSize(ROWS, COLS);
-    realBoard.setRowAndColSize(ROWS, COLS);
+    setRowAndColSizes(5, 5);
+    gameBoard.setRowAndColSize(row_size, col_size);
+    realBoard.setRowAndColSize(row_size, col_size);
     gameBoard.makeBoard();
     realBoard.makeBoard();
 }

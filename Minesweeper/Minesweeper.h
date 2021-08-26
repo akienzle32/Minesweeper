@@ -9,13 +9,13 @@
 #define Minesweeper_h
 #include "Board.h"
 
-const int ROWS = 5;
-const int COLS = 5;
 const int MINES = 20;
 
 class Minesweeper
 {
 private:
+    int row_size;
+    int col_size;
     int row;
     int col;
     Board realBoard; // Board that contains the locations of all mines.
@@ -23,6 +23,8 @@ private:
     
 public:
     Minesweeper();
+    
+    void setRowAndColSizes(int y, int x);
     
     void makeBoards();
     
