@@ -190,7 +190,7 @@ void Minesweeper::updateGame()
         gameBoard.setCellContents(row, col, countMines(realBoard, row, col));
 }
 
-// Allows the user to cheat by displaying the realBoard (i.e., the one with the mines). 
+// Allows the user to cheat by displaying the realBoard (i.e., the one with the mines).
 void Minesweeper::cheatGame()
 {
     realBoard.printBoard();

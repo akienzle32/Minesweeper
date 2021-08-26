@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include <iostream>
-#include <cstdlib>
 #include "Board.h"
 
 Board::Board()
@@ -22,70 +21,6 @@ void Board::makeBoard()
         for (int j = 0; j < COLS; j++)
         {
             board[i][j] = '-';
-        }
-    }
-}
-/*
-void Board::placeMines(int mines)
-{
-    int minesPlaced = 0;
-    srand(time(0));
-    
-    // Randomly drop the amount of mines determined by the MINES global constant.
-    while (minesPlaced < mines)
-    {
-        int randRow = rand() % 5;
-        int randCol = rand() % 5;
-        
-        if (board[randRow][randCol] != '*')
-        {
-            board[randRow][randCol] = '*';
-            minesPlaced++;
-        }
-    }
-}
-*/
-
-char Board::countMines(int y, int x)
-{
-    char charMines = '-';
-    if (isValidCell(y, x))
-    {
-        int mineCounter = 0;
-        if (board[y][x] != '*')
-        {
-            int north = y-1;
-            int south = y+2;
-            int west = x-1;
-            int east = x+2;
-    
-            for (int i = north; i < south; i++)
-            {
-                for (int  j = west; j < east; j++)
-                {
-                    if (isValidCell(i, j))
-                    {
-                        if (board[i][j] == '*')
-                            mineCounter++;
-                    }
-                }
-                charMines = mineCounter + '0';
-            }
-        }
-    }
-    return(charMines);
-}
-
-void Board::countAndReveal()
-{
-    for (int i = 0; i < ROWS; i++)
-    {
-        for (int j = 0; j < COLS; j++)
-        {
-            if (board[i][j] != '*')
-            {
-                board[i][j] = countMines(i, j);
-            }
         }
     }
 }
