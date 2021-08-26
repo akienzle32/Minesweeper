@@ -26,8 +26,8 @@ void Minesweeper::placeMines()
     // Randomly drop the amount of mines determined by the MINES global constant.
     while (minesPlaced < MINES)
     {
-        int randRow = rand() % ROWS;
-        int randCol = rand() % COLS;
+        int randRow = rand() % realBoard.getRowSize();
+        int randCol = rand() % realBoard.getColSize();
         
         if (realBoard.getCellContents(randRow, randCol) != '*')
         {
@@ -71,9 +71,9 @@ char Minesweeper::countMines(Board& b, int y, int x)
 // This function applies countMines() to every cell in realBoard.
 void Minesweeper::countAndReveal()
 {
-    for (int i = 0; i < ROWS; i++)
+    for (int i = 0; i < realBoard.getRowSize(); i++)
     {
-        for (int j = 0; j < COLS; j++)
+        for (int j = 0; j < realBoard.getColSize(); j++)
         {
             if (realBoard.getCellContents(i, j) != '*')
                 realBoard.setCellContents(i, j, countMines(realBoard, i, j));
@@ -102,9 +102,9 @@ bool Minesweeper::hasWon()
     bool result = false;
     int dashCounter = 0;
     
-    for (int i = 0; i < ROWS; i++)
+    for (int i = 0; i < gameBoard.getRowSize(); i++)
     {
-        for (int j = 0; j < COLS; j++)
+        for (int j = 0; j < gameBoard.getColSize(); j++)
         {
             if (gameBoard.getCellContents(i, j) == '-')
                 dashCounter++;

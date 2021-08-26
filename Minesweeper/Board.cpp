@@ -68,3 +68,19 @@ bool Board::isValidCell(int y, int x)
     
     return(result);
 }
+
+void Board::setRowAndColSize(int y, int x)
+{
+    ROWS = y;
+    COLS = x;
+}
+
+int Board::getRowSize() const
+{
+    return(ROWS);
+}
+
+int Board::getColSize() const
+{
+    return(COLS);
+}

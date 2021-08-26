@@ -8,13 +8,15 @@
 #ifndef Board_h
 #define Board_h
 
-const int ROWS = 5;
-const int COLS = 5;
+const int MAX_ROWS = 20;
+const int MAX_COLS = 20;
 
 class Board
 {
 private:
-    char board[ROWS][COLS];
+    char board[MAX_ROWS][MAX_COLS];
+    int ROWS;
+    int COLS;
     
 public:
     Board();
@@ -28,6 +30,12 @@ public:
     void setCellContents(int y, int x, char c);
     
     bool isValidCell(int y, int x);
+    
+    void setRowAndColSize (int y, int x);
+    
+    int getRowSize() const;
+    
+    int getColSize() const;
 
 };
 #endif /* Board_h */
