@@ -16,7 +16,6 @@ class Minesweeper
 private:
     int row;
     int col;
-    bool cheat; // Setting which enables user to see the realBoard.
     Board realBoard; // Board that contains the locations of all mines.
     Board gameBoard; // Board that the user sees.
     

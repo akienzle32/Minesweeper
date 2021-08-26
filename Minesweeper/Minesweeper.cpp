@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include "Minesweeper.h"
 
-Minesweeper::Minesweeper() : row(0), col(0), cheat(true)
+Minesweeper::Minesweeper() : row(0), col(0)
 {
     gameBoard.makeBoard();
     realBoard.makeBoard();
