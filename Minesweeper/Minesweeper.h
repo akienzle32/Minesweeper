@@ -9,6 +9,8 @@
 #define Minesweeper_h
 #include "Board.h"
 
+const int ROWS = 5;
+const int COLS = 5;
 const int MINES = 20;
 
 class Minesweeper
@@ -21,6 +23,8 @@ private:
     
 public:
     Minesweeper();
+    
+    void makeBoards();
     
     void placeMines();
     

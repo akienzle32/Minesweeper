@@ -10,16 +10,16 @@
 #include "Board.h"
 
 int main() {
-    
+    /*
     Board b;
     b.setRowAndColSize(5, 5);
     b.makeBoard();
     b.printBoard();
-
-    /*
+    */
+    
     Minesweeper game;
     game.cheatGame();
     game.playGame();
-    */
+
     return(0);
 }

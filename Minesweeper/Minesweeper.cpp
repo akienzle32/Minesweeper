@@ -12,10 +12,17 @@
 
 Minesweeper::Minesweeper() : row(0), col(0)
 {
-    gameBoard.makeBoard();
-    realBoard.makeBoard();
+    makeBoards();
     placeMines();
     countAndReveal();
+}
+
+void Minesweeper::makeBoards()
+{
+    gameBoard.setRowAndColSize(ROWS, COLS);
+    realBoard.setRowAndColSize(ROWS, COLS);
+    gameBoard.makeBoard();
+    realBoard.makeBoard();
 }
 
 void Minesweeper::placeMines()
