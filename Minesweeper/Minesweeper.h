@@ -9,8 +9,6 @@
 #define Minesweeper_h
 #include "Board.h"
 
-//const int MINES = 20;
-
 class Minesweeper
 {
 private:

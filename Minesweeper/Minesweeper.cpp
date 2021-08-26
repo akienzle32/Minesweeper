@@ -24,6 +24,16 @@ void Minesweeper::setRowColAndMines(int y, int x, int mines)
 
 }
 
+void Minesweeper::promptForDifficulty()
+{
+    char c;
+    std::cout << "Please choose a level of difficulty.\n";
+    std::cout << "Enter 'E' for easy (5x5 board), 'M' for medium (10x10 board),\nor 'H' for hard (15x15 board):\n\n";
+    
+    std::cin >> c;
+    setDifficultyLevel(c);
+}
+
 void Minesweeper::setDifficultyLevel(char level)
 {
     switch(level)
@@ -43,23 +53,13 @@ void Minesweeper::setDifficultyLevel(char level)
     }
 }
 
-void Minesweeper::promptForDifficulty()
-{
-    char c;
-    std::cout << "Please choose a level of difficulty. Enter 'E' for easy (5x5 board), 'M' for medium (10x10 board), or 'H' for hard (15x15 board)." << std::endl;
-    
-    std::cin >> c;
-    setDifficultyLevel(c);
-}
- 
+// Helper function to create both boards.
 void Minesweeper::makeBoards()
 {
     gameBoard.makeBoard();
     realBoard.makeBoard();
     placeMines();
     countAndReveal();
-    gameBoard.printBoard();
-    realBoard.printBoard();
 }
 
 void Minesweeper::placeMines()
