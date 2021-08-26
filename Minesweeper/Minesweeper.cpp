@@ -103,6 +103,34 @@ bool Minesweeper::isAlive()
 }
 */
 
+// This function determines if the player has won the game by determining if the number of
+// revealed cells is equal to the number of cells without mines.
+bool Minesweeper::hasWon()
+{
+    bool result = false;
+    int dashCounter = 0;
+    int magicNumber = MINES;
+    
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            if (gameBoard.getCellContents(i, j) == '-')
+                dashCounter++;
+        }
+    }
+    
+    if (dashCounter == magicNumber and realBoard.getCellContents(row, col) != '*')
+    {
+        result = true;
+        realBoard.printBoard();
+        std::cout << "You won!" << std::endl;
+    }
+    
+    return(result);
+}
+
+/*
 // This function determines if the player has won the game by finding out if the number of
 // unrevealed cells is equal to the number of mines.
 bool Minesweeper::hasWon()
@@ -125,6 +153,7 @@ bool Minesweeper::hasWon()
     
     return(result);
 }
+*/
 
 // Set row and column variables to values determined by the player (if the values
 // are valid based on the size of the rows and columns). The function allows the user
