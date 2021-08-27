@@ -8,8 +8,8 @@
 #ifndef Board_h
 #define Board_h
 
-const int MAX_ROWS = 20;
-const int MAX_COLS = 20;
+const int MAX_ROWS = 30;
+const int MAX_COLS = 16;
 
 class Board
 {

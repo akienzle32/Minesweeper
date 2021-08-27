@@ -9,7 +9,7 @@
 #include <iostream>
 #include "Board.h"
 
-Board::Board()
+Board::Board() : rows(0), cols(0)
 {
     makeBoard();
 }
@@ -40,10 +40,10 @@ void Board::printBoard()
         }
         std::cout << std::endl;
         
-        for (int i = 0; i < rows; i++)
+        for (int i = 0; i < cols; i++)
         {
             std::cout << i << "  ";
-            for (int j = 0; j < cols; j++)
+            for (int j = 0; j < rows; j++)
             {
                 std::cout << board[i][j] << "  ";
             }
@@ -71,7 +71,7 @@ void Board::printBoard()
             {
                 std::cout << board[i][j] << "  ";
             }
-        std::cout << std::endl;
+            std::cout << std::endl;
         }
         for (int i = 10; i < rows; i++)
         {
