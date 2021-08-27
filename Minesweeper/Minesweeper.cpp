@@ -53,10 +53,10 @@ void Minesweeper::setDifficultyLevel(Minesweeper::Difficulty level)
     switch(level)
     {
         case EASY:
-            setRowColAndMines(5, 5, 4);
+            setRowColAndMines(10, 10, 12);
             break;
         case MEDIUM:
-            setRowColAndMines(10, 10, 10);
+            setRowColAndMines(16, 16, 40);
             break;
         case HARD:
             setRowColAndMines(15, 15, 25);
