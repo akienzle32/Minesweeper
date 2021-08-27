@@ -25,40 +25,63 @@ void Board::makeBoard()
     }
 }
 
+// Function to print boards. Because an extra digit in the row/column numbers interferes
+// with spacing, it treats boards with more than 10 rows/columns differently from those
+// with less than 10.
 void Board::printBoard()
 {
-    std::cout << "    ";
-    
-    // Print column numbers first.
-    for (int i = 0; i < 10; i++)
+    if (ROWS < 10)
     {
-        std::cout << i << "  ";
-    }
-    for (int i = 10; i < COLS; i++)
-    {
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-    
-    // Then print row numbers, along with a properly spaced version of the
-    // the board.
-    for (int i = 0; i < 10; i++)
-    {
-        std::cout << i << "   ";
-        for (int j = 0; j < COLS; j++)
+        std::cout << "   ";
+        
+        for (int i = 0; i < COLS; i++)
         {
-            std::cout << board[i][j] << "  ";
+            std::cout << i << "  ";
         }
         std::cout << std::endl;
-    }
-    for (int i = 10; i < ROWS; i++)
-    {
-        std::cout << i << "  ";
-        for (int j = 0; j < COLS; j++)
+        
+        for (int i = 0; i < ROWS; i++)
         {
-            std::cout << board[i][j] << "  ";
+            std::cout << i << "  ";
+            for (int j = 0; j < COLS; j++)
+            {
+                std::cout << board[i][j] << "  ";
+            }
+            std::cout << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "    ";
+    
+        for (int i = 0; i < 10; i++)
+        {
+            std::cout << i << "  ";
+        }
+        for (int i = 10; i < COLS; i++)
+        {
+            std::cout << i << " ";
         }
         std::cout << std::endl;
+    
+        for (int i = 0; i < 10; i++)
+        {
+            std::cout << i << "   ";
+            for (int j = 0; j < COLS; j++)
+            {
+                std::cout << board[i][j] << "  ";
+            }
+        std::cout << std::endl;
+        }
+        for (int i = 10; i < ROWS; i++)
+        {
+            std::cout << i << "  ";
+            for (int j = 0; j < COLS; j++)
+            {
+                std::cout << board[i][j] << "  ";
+            }
+            std::cout << std::endl;
+        }
     }
 }
 
