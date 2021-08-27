@@ -15,8 +15,8 @@ class Board
 {
 private:
     char board[MAX_ROWS][MAX_COLS];
-    int ROWS;
-    int COLS;
+    int rows;
+    int cols;
     
 public:
     Board();

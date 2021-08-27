@@ -16,9 +16,9 @@ Board::Board()
 
 void Board::makeBoard()
 {
-    for (int i = 0; i < ROWS; i++)
+    for (int i = 0; i < rows; i++)
     {
-        for (int j = 0; j < COLS; j++)
+        for (int j = 0; j < cols; j++)
         {
             board[i][j] = '-';
         }
@@ -30,20 +30,20 @@ void Board::makeBoard()
 // with less than 10.
 void Board::printBoard()
 {
-    if (ROWS < 10)
+    if (rows < 10)
     {
         std::cout << "   ";
         
-        for (int i = 0; i < COLS; i++)
+        for (int i = 0; i < cols; i++)
         {
             std::cout << i << "  ";
         }
         std::cout << std::endl;
         
-        for (int i = 0; i < ROWS; i++)
+        for (int i = 0; i < rows; i++)
         {
             std::cout << i << "  ";
-            for (int j = 0; j < COLS; j++)
+            for (int j = 0; j < cols; j++)
             {
                 std::cout << board[i][j] << "  ";
             }
@@ -58,7 +58,7 @@ void Board::printBoard()
         {
             std::cout << i << "  ";
         }
-        for (int i = 10; i < COLS; i++)
+        for (int i = 10; i < cols; i++)
         {
             std::cout << i << " ";
         }
@@ -67,16 +67,16 @@ void Board::printBoard()
         for (int i = 0; i < 10; i++)
         {
             std::cout << i << "   ";
-            for (int j = 0; j < COLS; j++)
+            for (int j = 0; j < cols; j++)
             {
                 std::cout << board[i][j] << "  ";
             }
         std::cout << std::endl;
         }
-        for (int i = 10; i < ROWS; i++)
+        for (int i = 10; i < rows; i++)
         {
             std::cout << i << "  ";
-            for (int j = 0; j < COLS; j++)
+            for (int j = 0; j < cols; j++)
             {
                 std::cout << board[i][j] << "  ";
             }
@@ -99,7 +99,7 @@ void Board::setCellContents(int y, int x, char c)
 bool Board::isValidCell(int y, int x)
 {
     bool result = false;
-    if ((y >= 0 and y < ROWS) and (x >= 0 and x < COLS))
+    if ((y >= 0 and y < rows) and (x >= 0 and x < cols))
         result = true;
     
     return(result);
@@ -107,16 +107,16 @@ bool Board::isValidCell(int y, int x)
 
 void Board::setRowAndColSize(int y, int x)
 {
-    ROWS = y;
-    COLS = x;
+    rows = y;
+    cols = x;
 }
 
 int Board::getRowSize() const
 {
-    return(ROWS);
+    return(rows);
 }
 
 int Board::getColSize() const
 {
-    return(COLS);
+    return(cols);
 }
