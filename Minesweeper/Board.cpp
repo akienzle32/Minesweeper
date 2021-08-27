@@ -16,9 +16,9 @@ Board::Board()
 
 void Board::makeBoard()
 {
-    for (int i = 0; i < rows; i++)
+    for (int i = 0; i < cols; i++)
     {
-        for (int j = 0; j < cols; j++)
+        for (int j = 0; j < rows; j++)
         {
             board[i][j] = '-';
         }
