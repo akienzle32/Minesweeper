@@ -27,10 +27,14 @@ void Board::makeBoard()
 
 void Board::printBoard()
 {
-    std::cout << "  ";
+    std::cout << "    ";
     
     // Print column numbers first.
-    for (int i = 0; i < COLS; i++)
+    for (int i = 0; i < 10; i++)
+    {
+        std::cout << i << "  ";
+    }
+    for (int i = 10; i < COLS; i++)
     {
         std::cout << i << " ";
     }
@@ -38,12 +42,21 @@ void Board::printBoard()
     
     // Then print row numbers, along with a properly spaced version of the
     // the board.
-    for (int i = 0; i < ROWS; i++)
+    for (int i = 0; i < 10; i++)
     {
-        std::cout << i << " ";
+        std::cout << i << "   ";
         for (int j = 0; j < COLS; j++)
         {
-            std::cout << board[i][j] << " ";
+            std::cout << board[i][j] << "  ";
+        }
+        std::cout << std::endl;
+    }
+    for (int i = 10; i < ROWS; i++)
+    {
+        std::cout << i << "  ";
+        for (int j = 0; j < COLS; j++)
+        {
+            std::cout << board[i][j] << "  ";
         }
         std::cout << std::endl;
     }
