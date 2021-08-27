@@ -123,7 +123,7 @@ char Minesweeper::countMines(Board& b, int y, int x)
     return(charMines);
 }
 
-// This function applies countMines() to every cell in realBoard.
+// This function applies countMines() to every cell on the board.
 void Minesweeper::countAndRevealAllMines(Board& b)
 {
     for (int i = 0; i < b.getRowSize(); i++)
