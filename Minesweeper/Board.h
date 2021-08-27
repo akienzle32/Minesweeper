@@ -8,13 +8,13 @@
 #ifndef Board_h
 #define Board_h
 
-const int MAX_ROWS = 30;
-const int MAX_COLS = 16;
+const int MAX_ROWS = 16;
+const int MAX_COLS = 30;
 
 class Board
 {
 private:
-    char board[MAX_ROWS][MAX_COLS];
+    char board[MAX_COLS][MAX_ROWS];
     int rows;
     int cols;
     
