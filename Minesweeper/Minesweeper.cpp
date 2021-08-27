@@ -48,7 +48,7 @@ void Minesweeper::promptForDifficulty()
     }
 }
 
-void Minesweeper::setDifficultyLevel(Minesweeper::Difficulty level)
+void Minesweeper::setDifficultyLevel(Difficulty level)
 {
     switch(level)
     {
@@ -69,11 +69,11 @@ void Minesweeper::makeBoards()
 {
     gameBoard.makeBoard();
     realBoard.makeBoard();
-    placeMines();
-    countAndReveal();
+    placeMines(realBoard);
+    countAndReveal(realBoard);
 }
 
-void Minesweeper::placeMines()
+void Minesweeper::placeMines(Board& b)
 {
     int minesPlaced = 0;
     srand(time(0));
@@ -81,12 +81,12 @@ void Minesweeper::placeMines()
     // Randomly drop the amount of mines determined by the MINES global constant.
     while (minesPlaced < mines)
     {
-        int randRow = rand() % realBoard.getRowSize();
-        int randCol = rand() % realBoard.getColSize();
+        int randRow = rand() % b.getRowSize();
+        int randCol = rand() % b.getColSize();
         
-        if (realBoard.getCellContents(randRow, randCol) != '*')
+        if (b.getCellContents(randRow, randCol) != '*')
         {
-            realBoard.setCellContents(randRow, randCol, '*');
+            b.setCellContents(randRow, randCol, '*');
             minesPlaced++;
         }
     }
@@ -124,14 +124,14 @@ char Minesweeper::countMines(Board& b, int y, int x)
 }
 
 // This function applies countMines() to every cell in realBoard.
-void Minesweeper::countAndReveal()
+void Minesweeper::countAndReveal(Board& b)
 {
-    for (int i = 0; i < realBoard.getRowSize(); i++)
+    for (int i = 0; i < b.getRowSize(); i++)
     {
-        for (int j = 0; j < realBoard.getColSize(); j++)
+        for (int j = 0; j < b.getColSize(); j++)
         {
-            if (realBoard.getCellContents(i, j) != '*')
-                realBoard.setCellContents(i, j, countMines(realBoard, i, j));
+            if (b.getCellContents(i, j) != '*')
+                b.setCellContents(i, j, countMines(b, i, j));
         }
     }
 }

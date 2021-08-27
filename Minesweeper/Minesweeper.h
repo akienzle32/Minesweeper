@@ -24,17 +24,17 @@ public:
     
     void setRowColAndMines(int y, int x, int mines);
     
-    void setDifficultyLevel(Minesweeper::Difficulty level);
+    void setDifficultyLevel(Difficulty level);
     
     void promptForDifficulty();
     
     void makeBoards();
     
-    void placeMines();
+    void placeMines(Board& b);
     
     char countMines(Board& b, int y, int x);
     
-    void countAndReveal();
+    void countAndReveal(Board& b);
     
     bool isAlive();
     
