@@ -28,7 +28,7 @@ void Minesweeper::promptForDifficulty()
 {
     char c;
     std::cout << "Please choose a level of difficulty.\n";
-    std::cout << "Enter 'E' for easy (5x5 board), 'M' for medium (10x10 board),\nor 'H' for hard (15x15 board):\n\n";
+    std::cout << "Enter 'E' for easy (8x8 board), 'M' for medium (16x16 board),\nor 'H' for hard (16x20 board):\n\n";
     
     std::cin >> c;
     switch(c)
