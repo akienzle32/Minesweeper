@@ -70,7 +70,7 @@ void Minesweeper::makeBoards()
     gameBoard.makeBoard();
     realBoard.makeBoard();
     placeMines(realBoard);
-    countAndReveal(realBoard);
+    countAndRevealAllMines(realBoard);
 }
 
 void Minesweeper::placeMines(Board& b)
@@ -124,7 +124,7 @@ char Minesweeper::countMines(Board& b, int y, int x)
 }
 
 // This function applies countMines() to every cell in realBoard.
-void Minesweeper::countAndReveal(Board& b)
+void Minesweeper::countAndRevealAllMines(Board& b)
 {
     for (int i = 0; i < b.getRowSize(); i++)
     {

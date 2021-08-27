@@ -34,7 +34,7 @@ public:
     
     char countMines(Board& b, int y, int x);
     
-    void countAndReveal(Board& b);
+    void countAndRevealAllMines(Board& b);
     
     bool isAlive();
     
