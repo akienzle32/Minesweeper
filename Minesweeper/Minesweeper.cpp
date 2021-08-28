@@ -177,7 +177,7 @@ bool Minesweeper::hasWon()
 }
 
 // Sets row and column variables to values determined by the player (if the values are
-// valid based on the size of ROWS and COLS in the Board class). The function accepts
+// valid based on the size of rows and cols in the Board class). The function accepts
 // these values as standard x,y coordinates (i.e., column first, then row). It also
 // informs the player if they have already selected this cell before.
 void Minesweeper::move()
