@@ -25,17 +25,17 @@ public:
     
     void printBoard();
     
-    char getCellContents(int y, int x) const;
-    
-    void setCellContents(int y, int x, char c);
-    
-    bool isValidCell(int y, int x);
-    
     void setRowAndColSize (int y, int x);
     
     int getRowSize() const;
     
     int getColSize() const;
+    
+    char getCellContents(int y, int x) const;
+    
+    void setCellContents(int y, int x, char c);
+    
+    bool isValidCell(int y, int x);
 
 };
 #endif /* Board_h */
