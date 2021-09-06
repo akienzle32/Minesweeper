@@ -250,6 +250,7 @@ void Minesweeper::cheatGame()
     realBoard.printBoard();
 }
 
+// Recursive function that drives gameplay. 
 void Minesweeper::playGame()
 {
     if (!isAlive())
