@@ -12,52 +12,94 @@
 
 Minesweeper::Minesweeper() : row(0), col(0)
 {
-    makeBoard(realBoard);
-    makeBoard(gameBoard);
-    placeMines();
-    countAndReveal(realBoard);
+    promptForDifficulty();
+    makeBoards();
 }
 
-void Minesweeper::makeBoard(char board[][COLS])
+void Minesweeper::setRowColAndMines(int y, int x, int mines)
 {
-    for (int i = 0; i < ROWS; i++)
+    realBoard.setRowAndColSize(y, x);
+    gameBoard.setRowAndColSize(y, x);
+    this->mines = mines;
+
+}
+
+void Minesweeper::promptForDifficulty()
+{
+    char c;
+    std::cout << "Please choose a level of difficulty.\n";
+    std::cout << "Enter 'E' for easy (8x8 board), 'M' for medium (16x16 board),\nor 'H' for hard (16x20 board):\n\n";
+    
+    std::cin >> c;
+    switch(c)
     {
-        for (int j = 0; j < COLS; j++)
-        {
-            board[i][j] = '-';
-        }
+        case 'E':
+            setDifficultyLevel(EASY);
+            break;
+        case 'M':
+            setDifficultyLevel(MEDIUM);
+            break;
+        case 'H':
+            setDifficultyLevel(HARD);
+            break;
+        default:
+            std::cout << "That's not a valid level of difficulty.\n\n";
+            promptForDifficulty();
     }
 }
 
-// Function to drop the requisite number of mines randomly across the board.
-void Minesweeper::placeMines()
+void Minesweeper::setDifficultyLevel(Difficulty level)
+{
+    switch(level)
+    {
+        case EASY:
+            setRowColAndMines(8, 8, 10);
+            break;
+        case MEDIUM:
+            setRowColAndMines(16, 16, 40);
+            break;
+        case HARD:
+            setRowColAndMines(16, 20, 65);
+            break;
+    }
+}
+
+// Helper function to create both boards.
+void Minesweeper::makeBoards()
+{
+    gameBoard.makeBoard();
+    realBoard.makeBoard();
+    placeMines(realBoard);
+    countAndRevealAllMines(realBoard);
+}
+
+void Minesweeper::placeMines(Board& b)
 {
     int minesPlaced = 0;
     srand(time(0));
     
     // Randomly drop the amount of mines determined by the MINES global constant.
-    while (minesPlaced < MINES)
+    while (minesPlaced < mines)
     {
-        int randRow = rand() % ROWS;
-        int randCol = rand() % COLS;
+        int randRow = rand() % b.getRowSize();
+        int randCol = rand() % b.getColSize();
         
-        if (realBoard[randRow][randCol] != '*')
+        if (b.getCellContents(randRow, randCol) != '*')
         {
-            realBoard[randRow][randCol] = '*';
+            b.setCellContents(randRow, randCol, '*');
             minesPlaced++;
         }
     }
 }
 
-// This function counts all the mines immediately adjacent to a given cell,
-// and returns this number as a character.
-char Minesweeper::countMines(char board[][COLS], int y, int x)
+// Counts all mines immediately adjacent to a given cell.
+char Minesweeper::countMines(Board& b, int y, int x)
 {
     char charMines = '-';
-    if (isValidCell(y, x))
+    if (b.isValidCell(y, x))
     {
         int mineCounter = 0;
-        if (board[y][x] != '*')
+        if (b.getCellContents(y, x) != '*')
         {
             int north = y-1;
             int south = y+2;
@@ -68,9 +110,9 @@ char Minesweeper::countMines(char board[][COLS], int y, int x)
             {
                 for (int  j = west; j < east; j++)
                 {
-                    if (isValidCell(i, j))
+                    if (b.isValidCell(i, j))
                     {
-                        if (board[i][j] == '*')
+                        if (b.getCellContents(i, j) == '*')
                             mineCounter++;
                     }
                 }
@@ -81,102 +123,62 @@ char Minesweeper::countMines(char board[][COLS], int y, int x)
     return(charMines);
 }
 
-// This function counts all the adjacent mines to every cell on the board
-// and displays this number in the cell. Within normal gameplay, it is only called on
-// the realBoard.
-void Minesweeper::countAndReveal(char board[][COLS])
+// This function applies countMines() to every cell on the board.
+void Minesweeper::countAndRevealAllMines(Board& b)
 {
-    for (int i = 0; i < ROWS; i++)
+    for (int i = 0; i < b.getRowSize(); i++)
     {
-        for (int j = 0; j < COLS; j++)
+        for (int j = 0; j < b.getColSize(); j++)
         {
-            if (board[i][j] != '*')
-            {
-                board[i][j] = countMines(board, i, j);
-            }
+            if (b.getCellContents(i, j) != '*')
+                b.setCellContents(i, j, countMines(b, i, j));
         }
-    }
-}
-
-void Minesweeper::printBoard(char board[][COLS])
-{
-    std::cout << "  ";
-    
-    // Print column numbers first.
-    for (int i = 0; i < COLS; i++)
-    {
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-    
-    // Then print row numbers, along with a properly spaced version of the
-    // the board.
-    for (int i = 0; i < ROWS; i++)
-    {
-        std::cout << i << " ";
-        for (int j = 0; j < COLS; j++)
-        {
-            std::cout << board[i][j] << " ";
-        }
-        std::cout << std::endl;
     }
 }
 
 bool Minesweeper::isAlive()
 {
     bool result = true;
-    
-    if (gameBoard[row][col] == '*')
+    if (gameBoard.getCellContents(row, col) == '*')
     {
         result = false;
-        printBoard(realBoard);
+        realBoard.printBoard();
         std::cout << "You died!" << std::endl;
     }
     
     return(result);
 }
 
-// This function determines if the player has won the game by determining if the number of
-// revealed cells is equal to the number of cells without mines.
+// Determines if the player has won the game by calculating if the number of
+// unrevealed cells on gameBoard is equal to the number of mines.
 bool Minesweeper::hasWon()
 {
     bool result = false;
     int dashCounter = 0;
-    int magicNumber = MINES;
     
-    for (int i = 0; i < ROWS; i++)
+    for (int i = 0; i < gameBoard.getRowSize(); i++)
     {
-        for (int j = 0; j < COLS; j++)
+        for (int j = 0; j < gameBoard.getColSize(); j++)
         {
-            if (gameBoard[i][j] == '-')
+            if (gameBoard.getCellContents(i, j) == '-')
                 dashCounter++;
         }
     }
     
-    if (dashCounter == magicNumber and realBoard[row][col] != '*')
+    if (dashCounter == mines)
     {
         result = true;
-        printBoard(realBoard);
+        realBoard.printBoard();
         std::cout << "You won!" << std::endl;
     }
     
     return(result);
 }
 
-// Function to determine if a cell is on the board.
-bool Minesweeper::isValidCell(int y, int x)
-{
-    bool result = false;
-    
-    if ((y >= 0 and y < ROWS) and (x >= 0 and x < COLS))
-        result = true;
-    
-    return(result);
-}
-
-// Set row and column variables to values determined by the player (if the values
-// are valid based on the size of the rows and columns). The function allows the user
-// to input these values as standard x,y coordinates (i.e., column first, then row). 
+// Sets row and column variables to values determined by the player (if the values are
+// valid based on the size of rows and cols in the Board class). The function accepts
+// these values as standard x,y coordinates (i.e., column first, then row). It also
+// informs the player if they have already selected this cell before.
 void Minesweeper::move()
 {
     int y, x;
@@ -185,7 +187,7 @@ void Minesweeper::move()
     
     char digitArray[9] = {'0', '1', '2', '3', '4', '5', '6', '7', '8'};
     
-    if (!isValidCell(y, x))
+    if (!gameBoard.isValidCell(y, x))
     {
         std::cout << "Not a valid move!" << std::endl;
         move();
@@ -197,7 +199,7 @@ void Minesweeper::move()
         
         for (int i = 0; i < 9; i++)
         {
-            if (gameBoard[row][col] == digitArray[i])
+            if (gameBoard.getCellContents(row, col) == digitArray[i])
             {
                 std::cout << "You already revealed this cell." << std::endl;
             }
@@ -209,14 +211,14 @@ void Minesweeper::move()
 // mines if they have selected a cell bordered by zero mines.
 void Minesweeper::zeroFill(int y, int x)
 {
-    if (!isValidCell(y, x))
+    if (!realBoard.isValidCell(y, x))
         return;
-    if (realBoard[y][x] != '0')
+    if (realBoard.getCellContents(y, x) != '0')
         return;
-    if (gameBoard[y][x] == '0')
+    if (gameBoard.getCellContents(y, x) == '0')
         return;
     
-    gameBoard[y][x] = '0';
+    gameBoard.setCellContents(y, x, '0');
     
     int north = y-1;
     int south = y+1;
@@ -229,22 +231,23 @@ void Minesweeper::zeroFill(int y, int x)
     zeroFill(y, east);
 }
 
-// This function updates the game appropriately based on the user's choice of cell.
+// This function updates the gameBoard appropriately based on the user's choice of cell.
 void Minesweeper::updateGame()
 {
-    if (realBoard[row][col] == '*')
-        gameBoard[row][col] = '*';
+    if (realBoard.getCellContents(row, col) == '*')
+        gameBoard.setCellContents(row, col, '*');
         
-    else if (realBoard[row][col] == '0')
+    else if (realBoard.getCellContents(row, col) == '0')
         zeroFill(row, col);
         
     else
-        gameBoard[row][col] = countMines(realBoard, row, col);
+        gameBoard.setCellContents(row, col, countMines(realBoard, row, col));
 }
 
+// Allows the user to cheat by displaying the realBoard (i.e., the one with the mines).
 void Minesweeper::cheatGame()
 {
-    printBoard(realBoard);
+    realBoard.printBoard();
 }
 
 void Minesweeper::playGame()
@@ -253,8 +256,8 @@ void Minesweeper::playGame()
         return;
     if (hasWon())
         return;
-    
-    printBoard(gameBoard);
+
+    gameBoard.printBoard();
     move();
     updateGame();
     playGame();
@@ -263,10 +266,14 @@ void Minesweeper::playGame()
 // Utility function employed purely for testing purposes. 
 void Minesweeper::testGame()
 {
-    printBoard(gameBoard);
-    printBoard(realBoard);
-    //countAndReveal(realBoard);
-    //printBoard(realBoard);
+    gameBoard.printBoard();
+    realBoard.printBoard();
+    move();
+    updateGame();
+    gameBoard.printBoard();
+    move();
+    gameBoard.printBoard();
+    updateGame();
 }
 
 
