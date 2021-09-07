@@ -78,7 +78,7 @@ void Minesweeper::placeMines(Board& b)
     int minesPlaced = 0;
     srand(time(0));
     
-    // Randomly drop the amount of mines determined by the chosen difficulty level.
+    // Randomly drop the amount of mines determined by the player's chosen difficulty level.
     while (minesPlaced < mines)
     {
         int randRow = rand() % b.getRowSize();
